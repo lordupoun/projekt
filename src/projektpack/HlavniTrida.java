@@ -4,6 +4,9 @@ import java.util.Scanner;
 
 public class HlavniTrida {
 	//TODO: Ošetřit switch
+	//Rozdíl list/map -> klíče v mapě jsou rychlejší na hledání
+	//Nechat CHATGPT vytvořit mapu tabulky (filmů)
+	//Jak udělat abstrkatní třídy?
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("           -Filmotéka 3000-");
