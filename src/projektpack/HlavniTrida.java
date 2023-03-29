@@ -11,12 +11,12 @@ public class HlavniTrida {
 		System.out.println(" 2) Upravit stávající film");
 		System.out.println(" 3) Smazat stávající film");
 		System.out.println(" 4) Ohodnotit film");
-		System.out.println("----");
+		System.out.println("-----------------------------------");
 		System.out.println(" 5) Vypsat všechny filmy z databáze");
 		System.out.println(" 6) Vyhledat film v databázi");
 		System.out.println(" 7) Vypsat herce/animátory s více filmy v databázi");
 		System.out.println(" 8) Vyhledat filmy dle herce/animátora");
-		System.out.println("----");
+		System.out.println("-----------------------------------");
 		System.out.println(" 9) Uložit informace o filmu do souboru");
 		System.out.println("10) Načíst informace o filmu ze souboru");
 		switch(readInt(sc)) 
