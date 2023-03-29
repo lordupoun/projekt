@@ -19,6 +19,7 @@ public class HlavniTrida {
 		System.out.println("-----------------------------------");
 		System.out.println(" 9) Uložit informace o filmu do souboru");
 		System.out.println("10) Načíst informace o filmu ze souboru");
+		System.out.println("10) test.");
 		switch(readInt(sc)) 
 		{
 		case 1:
