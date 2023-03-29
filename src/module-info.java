@@ -1,0 +1,9 @@
+/**
+ * 
+ */
+/**
+ * @author Krumpac
+ *
+ */
+module projekt {
+}
