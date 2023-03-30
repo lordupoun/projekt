@@ -3,12 +3,8 @@ package projektpack;
 import java.util.Scanner;
 
 public class HlavniTrida {
-	//TODO: Ošetřit switch
-	//Rozdíl list/map -> klíče v mapě jsou rychlejší na hledání
-	//Nechat CHATGPT vytvořit mapu tabulky (filmů)
-	//Jak udělat abstrkatní třídy?
-	//třídy privátní, udělat gettery a settery¨
-	//Mapa kde je klíč a film -> datový typ film který obsahuje podrobnosti o filmu
+	//Mapa bude skladovat filmy, key bude jméno -> zhruba na motivy chatgpt
+	//abstraktní třída zadefinuje film, potom budou třídy hranej a animovanej
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("           -Filmotéka 3000-");
@@ -56,3 +52,9 @@ public class HlavniTrida {
 			return cislo;
 	}
 }
+//TODO: Ošetřit switch
+//Rozdíl list/map -> klíče v mapě jsou rychlejší na hledání
+//Nechat CHATGPT vytvořit mapu tabulky (filmů)
+//Jak udělat abstrkatní třídy?
+//třídy privátní, udělat gettery a settery¨
+//Mapa kde je klíč a film -> datový typ film který obsahuje podrobnosti o filmu
