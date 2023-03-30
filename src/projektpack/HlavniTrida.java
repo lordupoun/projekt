@@ -7,6 +7,8 @@ public class HlavniTrida {
 	//Rozdíl list/map -> klíče v mapě jsou rychlejší na hledání
 	//Nechat CHATGPT vytvořit mapu tabulky (filmů)
 	//Jak udělat abstrkatní třídy?
+	//třídy privátní, udělat gettery a settery¨
+	//Mapa kde je klíč a film -> datový typ film který obsahuje podrobnosti o filmu
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("           -Filmotéka 3000-");
