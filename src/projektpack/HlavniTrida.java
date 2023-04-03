@@ -7,6 +7,7 @@ public class HlavniTrida {
 	//abstraktní třída zadefinuje film, potom budou třídy hranej a animovanej
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
+		DatabazeFilmu databaze1 = new DatabazeFilmu();
 		System.out.println("           -Filmotéka 3000-");
 		System.out.println(" 1) Přidat nový film do databáze");
 		System.out.println(" 2) Upravit stávající film");
@@ -24,7 +25,17 @@ public class HlavniTrida {
 		switch(readInt(sc)) 
 		{
 		case 1:
-			break;
+			switch(readInt(sc))
+			{
+			case 1:
+				HranyFilm movieHrany = new HranyFilm(null, null, 0, null);
+				databaze1.addFilm(movieHrany);
+				break;
+			case 2:
+				AnimovanyFilm movieAnimovany = new AnimovanyFilm(null, null, 0, 0, null); //vymazat objekt po zapsání do databáze?
+				databaze1.addFilm(movieAnimovany);
+				break;	
+			}
 		case 2:
 			break;
 		case 3:
@@ -32,7 +43,7 @@ public class HlavniTrida {
 		case 4:
 			break;
 		}
-		
+		sc.close();
 	}
 
 	public static int readInt(Scanner sc)
