@@ -24,3 +24,4 @@ public abstract class Film {
 //mapa herců/animátorů by mohla být společná, takhle to ale bude univerzálnejší
 //list hodnocení (v pairs body a String)
 //mapa herců je společná, tak aby
+//nechat to tak jak to je, případně přesun TreeMapy mapaHercu do HranyFilm a TreeMapy animátoři do AnimovanyFilm -> takřka bez změn -> změní se konstruktor třídy Film, ostatní chyby se ukážou(spouštění konstruktoru přes super), a vkládání herců se nebude provádět konstruktorem a metodama třídy Film, ale třídy HranýFilm, případně AnimovanýFilm
