@@ -1,4 +1,4 @@
-package projektpack; //je to o konvenci
+package projektpack; //je to o konvenci, v případě malýho množství tříd je to jedno
 
 import java.util.TreeMap;
 
