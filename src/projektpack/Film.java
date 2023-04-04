@@ -1,6 +1,6 @@
 package projektpack; //je to o konvenci, v případě malýho množství tříd je to jedno
 
-import java.util.TreeMap;
+import java.util.TreeMap; //rozložení nechat tak jak je, jen přidat objekty -> seznam lidí se dá kdykoliv smazat a přehodit do jednotlivejch tříd
 
 public abstract class Film {
 	String nazev; //parametry filmu -> nazev, rezie, rok, seznam hercu
