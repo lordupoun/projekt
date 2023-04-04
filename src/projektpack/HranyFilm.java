@@ -15,3 +15,5 @@ public class HranyFilm extends Film { //pokud máme rozlišovat dva typy filmů 
 }
 //Film potřebuju uložit do mapy nebo něco, viz cviko
 //takhle mám TreeMap v každý třídě zvlášť (kvůli zadání), kdyby to bylo v třídě Filmu, musel bych možná dělat gettery
+//Pokud by zůstalo takhle, tak aimák může mít svůj vlastní konstruktor bez Treemapy a hranej s ní
+//Třeba

@@ -25,16 +25,35 @@ public class HlavniTrida {
 		switch(readInt(sc)) 
 		{
 		case 1:
-			switch(readInt(sc))
+			System.out.println();
+			topDesign();
+			System.out.println(" 1) Hraný");
+			System.out.println(" 2) Animovaný");
+			int switchCislo=sc.nextInt();
+			topDesign();
+			sc.nextLine();
+			System.out.println(" Napište název filmu:");
+			String nazev=readString(sc);
+			System.out.println(" Napište jméno režie:");
+			String rezie=readString(sc);
+			System.out.println(" Napište rok vydání:");
+			int rok=readInt(sc);
+			switch(switchCislo)
 			{
 			case 1:
-				HranyFilm movieHrany = new HranyFilm(null, null, 0, null);
+				System.out.println(" Napište jméno herce nebo seznam jejich jmen:");
+				String herci="herec";
+				
+				HranyFilm movieHrany = new HranyFilm(nazev, rezie, rok, herci); //vymazat objekt po zapsání do databáze?
 				databaze1.addFilm(movieHrany);
 				break;
 			case 2:
-				AnimovanyFilm movieAnimovany = new AnimovanyFilm(null, null, 0, 0, null); //vymazat objekt po zapsání do databáze?
-				databaze1.addFilm(movieAnimovany);
-				break;	
+				System.out.println(" Napište minimální věk:");
+				int vek=readInt(sc);
+				System.out.println(" Napište jméno animátora nebo seznam jejich jmen:");
+				String animatori=readString(sc);
+				databaze1.addFilmAnimovanyRAW(nazev, rezie, rok, vek, animatori); //ušetřím proměnnou movieHrany ...
+				break;	//spojit herce a animatory dohromady?
 			}
 		case 2:
 			break;
@@ -61,6 +80,15 @@ public class HlavniTrida {
 				cislo = readInt(sc);
 			}
 			return cislo;
+	}
+	public static String readString(Scanner sc)
+	{
+		String text=sc.nextLine();
+		return text;
+	}
+	public static void topDesign()
+	{
+		System.out.println("           -Filmotéka 3000-");
 	}
 }
 //TODO: Ošetřit switch

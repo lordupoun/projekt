@@ -3,16 +3,17 @@ package projektpack; //je to o konvenci, v případě malýho množství tříd 
 import java.util.TreeMap;
 
 public abstract class Film {
-	String nazev;
+	String nazev; //parametry filmu -> nazev, rezie, rok, seznam hercu
 	String rezie;
 	int rok;
-	private TreeMap<String, String> mapaHercu;
-	public Film(String nazev, String rezie, int rok, String lide)
+	private TreeMap<String, String> mapaHercu; //??když to dám sólo, jak to vyřeším, když pak budu chtít přidat víc tříd, kde to bude společný //Na jakejch základech se rozhodovat jestli to tam má nebo nemá bejt -> množství metod?
+	public Film(String nazev, String rezie, int rok, String herci)
 	 {
 		this.nazev = nazev;
 		this.rezie = rezie;
 		this.rok=rok;
-		mapaHercu.put(lide, null); //případně rozvinout mapu animátorů přímo v třídě animáků (herce má stejně většina filmů)
+		mapaHercu = new TreeMap<>();
+		mapaHercu.put(herci, null); //případně rozvinout mapu animátorů přímo v třídě animáků (herce má stejně většina filmů)
 	 }
 
 	public String getNazev() {
