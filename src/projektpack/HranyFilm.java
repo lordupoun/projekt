@@ -11,7 +11,15 @@ public class HranyFilm extends Film { //pokud máme rozlišovat dva typy filmů 
 		super(nazev, rezie, rok, herci); //this.nazev=nazev; //nebo super -> zavolá celý konstruktor z původní třídy; u super záleží na pořádí
 		//mapaHercu = new TreeMap<>();
 		//mapaHercu.put(herci, herci); // vrátit zpět pokud má být mapa až v extended třídě
-	 }					
+	 }
+	@Override
+	void vypisFilm() {
+		// TODO Auto-generated method stub
+		System.out.println("Název: "+nazev);
+		System.out.println("Režie: "+rezie);
+		System.out.println("Rok: "+rok);
+		System.out.println("Herci: ");
+	}					
 }
 //Film potřebuju uložit do mapy nebo něco, viz cviko
 //takhle mám TreeMap v každý třídě zvlášť (kvůli zadání), kdyby to bylo v třídě Filmu, musel bych možná dělat gettery

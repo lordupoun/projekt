@@ -19,6 +19,11 @@ public class DatabazeFilmu { //do databaze vložím hotový film v mainu
 	{
 		mapaFilmu.put(nazev, new AnimovanyFilm(nazev, rezie, rok, vek, animatori)); //!!když nechám duplicitně název filmu stejnej jako key, bude to sice náročnější, ale přehlednější a víc futureproof
 	}
+	public Film getFilm(String nazev)
+	{
+		return mapaFilmu.get(nazev);
+	}
+	
 }
 //jak jsem to chtěl udělat před tím? dvě třídy sólo, každá s vlastní mapou pro hraný/animovaný film -> takhle vše v jedné mapě
 //jak ID? nechci to udělat jako list

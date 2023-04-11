@@ -21,7 +21,7 @@ public class HlavniTrida {
 		System.out.println("-----------------------------------");
 		System.out.println(" 9) Uložit informace o filmu do souboru");
 		System.out.println("10) Načíst informace o filmu ze souboru");
-		System.out.println("10) test.");
+		//System.out.println("10) test.");
 		switch(readInt(sc)) 
 		{
 		case 1:
@@ -42,8 +42,8 @@ public class HlavniTrida {
 			{
 			case 1:
 				System.out.println(" Napište jméno herce nebo seznam jejich jmen:");
-				String herci="herec";
-				
+				sc.nextLine();
+				String herci=readString(sc);
 				HranyFilm movieHrany = new HranyFilm(nazev, rezie, rok, herci); //vymazat objekt po zapsání do databáze?
 				databaze1.addFilm(movieHrany);
 				break;
@@ -55,8 +55,33 @@ public class HlavniTrida {
 				databaze1.addFilmAnimovanyRAW(nazev, rezie, rok, vek, animatori); //ušetřím proměnnou movieHrany ...
 				break;	//spojit herce a animatory dohromady?
 			}
+			System.out.println("------------------------------");
+			System.out.println("Film byl vložen do databáze.");
 		case 2:
+			topDesign();
+			System.out.println(" Napište název filmu, který chcete upravit:");
+			Film vybranyFilm=databaze1.getFilm(readString(sc));
+			System.out.println(" Zvolte parametr, který chcete upravit:");
+			System.out.println();
+			topDesign();
+			System.out.println(" 1) Název");
+			System.out.println(" 2) Režie");
+			System.out.println(" 3) Rok");
+			if(vybranyFilm instanceof HranyFilm)
+			{
+				System.out.println(" 4) Herci");
+			}
+			else
+			{
+				System.out.println(" 4) Seznam animátorů");
+				System.out.println(" 5) Doporučený věk");
+			}
+			switch(readInt(sc)) 
+			{
+			case 1:
+
 			break;
+			}
 		case 3:
 			break;
 		case 4:
@@ -88,9 +113,19 @@ public class HlavniTrida {
 	}
 	public static void topDesign()
 	{
+		System.out.println();
 		System.out.println("           -Filmotéka 3000-");
 	}
+	//public static void vypisFilm(Film movie) //vypis filmu je umisteny v jinych tridach
+	//{
+	//	System.out.println(movie.getNazev());
+	//}
+	public static void clearScreen() {  
+	    System.out.print("\033[H\033[2J");  
+	    System.out.flush();  
+	}  
 }
+
 //TODO: Ošetřit switch
 //Rozdíl list/map -> klíče v mapě jsou rychlejší na hledání
 //Nechat CHATGPT vytvořit mapu tabulky (filmů)
