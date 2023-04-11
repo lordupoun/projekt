@@ -22,6 +22,7 @@ public class HlavniTrida {
 		System.out.println(" 9) Uložit informace o filmu do souboru");
 		System.out.println("10) Načíst informace o filmu ze souboru");
 		//System.out.println("10) test.");
+		databaze1.addFilmHranyRAW("nazev", "rezie", 20,"herci");
 		switch(readInt(sc)) 
 		{
 		case 1:
@@ -51,6 +52,7 @@ public class HlavniTrida {
 				System.out.println(" Napište minimální věk:");
 				int vek=readInt(sc);
 				System.out.println(" Napište jméno animátora nebo seznam jejich jmen:");
+				sc.nextLine();
 				String animatori=readString(sc);
 				databaze1.addFilmAnimovanyRAW(nazev, rezie, rok, vek, animatori); //ušetřím proměnnou movieHrany ...
 				break;	//spojit herce a animatory dohromady?
@@ -59,6 +61,7 @@ public class HlavniTrida {
 			System.out.println("Film byl vložen do databáze.");
 		case 2:
 			topDesign();
+			sc.nextLine();
 			System.out.println(" Napište název filmu, který chcete upravit:");
 			Film vybranyFilm=databaze1.getFilm(readString(sc));
 			System.out.println(" Zvolte parametr, který chcete upravit:");
@@ -79,12 +82,38 @@ public class HlavniTrida {
 			switch(readInt(sc)) 
 			{
 			case 1:
-
+				System.out.println(" Zadej název:");
+				sc.nextLine();
+				vybranyFilm.setNazev(readString(sc));
+			break;				
+			case 2:
+				sc.nextLine();
+				vybranyFilm.setRezie(readString(sc));
+			break;
+			case 3:
+				sc.nextLine();
+				vybranyFilm.setRok(Integer.parseInt(readString(sc)));
+			break;
+			case 4:
+				sc.nextLine();
+				//vybranyFilm.setHerci(readString(sc));
+			break;
+			case 5:
+				sc.nextLine();
+				vybranyFilm.setRok(Integer.parseInt(readString(sc)));
 			break;
 			}
 		case 3:
+			topDesign();
+			sc.nextLine();
+			System.out.println(" Napište název filmu, který chcete smazat:");
+			databaze1.deleteFilm(readString(sc));
 			break;
 		case 4:
+			topDesign();
+			sc.nextLine();
+			Film vybranyFilm3=databaze1.getFilm(readString(sc));
+			vybranyFilm3.vypisFilm();
 			break;
 		}
 		sc.close();

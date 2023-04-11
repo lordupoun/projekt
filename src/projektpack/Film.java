@@ -22,6 +22,18 @@ public abstract class Film {
 	abstract void vypisFilm();
 	//metoda pro set herce v rámci třídy film (herce dát sólo poznámka?)
 	//abstract setHodnoceni
+
+	public void setNazev(String nazev) {
+		this.nazev = nazev;
+	}
+
+	public void setRezie(String rezie) {
+		this.rezie = rezie;
+	}
+
+	public void setRok(int rok) {
+		this.rok = rok;
+	}
 }
 //mapa herců/animátorů by mohla být společná, takhle to ale bude univerzálnejší
 //list hodnocení (v pairs body a String)

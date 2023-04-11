@@ -23,6 +23,10 @@ public class DatabazeFilmu { //do databaze vložím hotový film v mainu
 	{
 		return mapaFilmu.get(nazev);
 	}
+	public void deleteFilm(String nazev)
+	{
+		mapaFilmu.remove(nazev);
+	}
 	
 }
 //jak jsem to chtěl udělat před tím? dvě třídy sólo, každá s vlastní mapou pro hraný/animovaný film -> takhle vše v jedné mapě
