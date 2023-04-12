@@ -118,16 +118,15 @@ public class HlavniTrida {
 			topDesign();
 			System.out.println(" Napište název filmu, který chcete ohodnotit:");
 			Film vybranyFilm2=databaze1.getFilm(readString(sc));
-			System.out.println(" Napište název filmu, který chcete ohodnotit:");
-			if(vybranyFilm2 instanceof HranyFilm)
-				{
+			System.out.println(" Napiště číselné hodnocení filmu.");
+			Hodnoceni hodnoceniFilmu = new Hodnoceni();
 				do
 				{
-					int bodove = readInt(sc);	
+					hodnoceniFilmu.setBody(readInt(sc));
 				}
-				while
+				while(vybranyFilm2.setHodnoceni(hodnoceniFilmu)==false);
+		
 				
-				}
 			String slovne = readString(sc);
 			Hodnoceni hodnoceniFilmu = new Hodnoceni();
 			vybranyFilm2.setHodnoceni(hodnoceniFilmu)

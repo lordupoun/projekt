@@ -38,8 +38,11 @@ public abstract class Film {
 	public void setRok(int rok) {
 		this.rok = rok;
 	}
-	abstract void setHodnoceni(Hodnoceni hodnoceniFilmu); //dopsat hodnocení do filmu, metoda bude vracet true, jestli splňuje požadavky filmu
-
+	void setHodnoceni(Hodnoceni hodnoceniFilmu) //dopsat hodnocení do filmu, metoda bude vracet true, jestli splňuje požadavky filmu
+	{
+	listHodnoceni.add(hodnoceniFilmu);
+	}
+	abstract boolean testBodyHodnoceni(Hodnoceni hodnoceniFilmu);
 }
 //mapa herců/animátorů by mohla být společná, takhle to ale bude univerzálnejší
 //list hodnocení (v pairs body a String)

@@ -6,7 +6,7 @@ import java.util.TreeMap;
 
 public class HranyFilm extends Film { //pokud máme rozlišovat dva typy filmů asi mají být odlišné kategorie
 	private TreeMap<String, String> mapaHercu; //vkládám Film -> který bude buď z instance Hraného nebo Animovaného
-	private List<String> listHodnoceni = new ArrayList<>();
+	private List<Hodnoceni> listHodnoceni = new ArrayList<>();
 	public HranyFilm(String nazev, String rezie, int rok, String herci)//v konstruktoru pomocí stringů, v setu pomocí Treemapy a listu
 	 {
 		super(nazev, rezie, rok); //this.nazev=nazev; //nebo super -> zavolá celý konstruktor z původní třídy; u super záleží na pořádí
@@ -20,7 +20,18 @@ public class HranyFilm extends Film { //pokud máme rozlišovat dva typy filmů 
 		System.out.println("Režie: "+rezie);
 		System.out.println("Rok: "+rok);
 		System.out.println("Herci: "+mapaHercu.keySet());
+	}
+	@Override
+	boolean setHodnoceni(Hodnoceni hodnoceniFilmu) {
+		if(hodnoceniFilmu.getBody()>1&&hodnoceniFilmu.getBody()<6)
+		{
+			listHodnoceni.add(hodnoceniFilmu);
+			return true;
+		}
+		else
+		return false;
 	}					
+	
 }
 //Film potřebuju uložit do mapy nebo něco, viz cviko
 //takhle mám TreeMap v každý třídě zvlášť (kvůli zadání), kdyby to bylo v třídě Filmu, musel bych možná dělat gettery
