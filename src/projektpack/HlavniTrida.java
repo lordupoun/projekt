@@ -8,7 +8,10 @@ public class HlavniTrida {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		DatabazeFilmu databaze1 = new DatabazeFilmu();
-		System.out.println("           -Filmotéka 3000-");
+		databaze1.addFilmHranyRAW("Forrest Gump", "Zjistim Jmeno", 1993,"Tom Hanks");
+		boolean konecProgramu = false;
+		while(konecProgramu==false) {
+		topDesign();
 		System.out.println(" 1) Přidat nový film do databáze");
 		System.out.println(" 2) Upravit stávající film");
 		System.out.println(" 3) Smazat stávající film");
@@ -22,7 +25,6 @@ public class HlavniTrida {
 		System.out.println(" 9) Uložit informace o filmu do souboru");
 		System.out.println("10) Načíst informace o filmu ze souboru");
 		//System.out.println("10) test.");
-		databaze1.addFilmHranyRAW("nazev", "rezie", 20,"herci");
 		switch(readInt(sc)) 
 		{
 		case 1:
@@ -49,9 +51,9 @@ public class HlavniTrida {
 				databaze1.addFilm(movieHrany);
 				break;
 			case 2:
-				System.out.println(" Napište minimální věk:");
+				System.out.println(" Napište minimální doporučený věk diváka:");
 				int vek=readInt(sc);
-				System.out.println(" Napište jméno animátora nebo seznam jejich jmen:");
+				System.out.println(" Napište jméno animátora nebo seznam jejich jmen (oddělený čárkami):");
 				sc.nextLine();
 				String animatori=readString(sc);
 				databaze1.addFilmAnimovanyRAW(nazev, rezie, rok, vek, animatori); //ušetřím proměnnou movieHrany ...
@@ -59,6 +61,7 @@ public class HlavniTrida {
 			}
 			System.out.println("------------------------------");
 			System.out.println("Film byl vložen do databáze.");
+			break;
 		case 2:
 			topDesign();
 			sc.nextLine();
@@ -103,19 +106,45 @@ public class HlavniTrida {
 				vybranyFilm.setRok(Integer.parseInt(readString(sc)));
 			break;
 			}
+			break;
 		case 3:
 			topDesign();
 			sc.nextLine();
 			System.out.println(" Napište název filmu, který chcete smazat:");
 			databaze1.deleteFilm(readString(sc));
+			System.out.println(" Film byl vymazán z databáze.");
 			break;
 		case 4:
 			topDesign();
+			System.out.println(" Napište název filmu, který chcete ohodnotit:");
+			Film vybranyFilm2=databaze1.getFilm(readString(sc));
+			System.out.println(" Napište název filmu, který chcete ohodnotit:");
+			if(vybranyFilm2 instanceof HranyFilm)
+				{
+				do
+				{
+					int bodove = readInt(sc);	
+				}
+				while
+				
+				}
+			String slovne = readString(sc);
+			Hodnoceni hodnoceniFilmu = new Hodnoceni();
+			vybranyFilm2.setHodnoceni(hodnoceniFilmu)
+			
+			break;
+		case 5:
+			topDesign();
 			sc.nextLine();
+			System.out.println(" Napište název filmu, který chcete vyhledat:");
 			Film vybranyFilm3=databaze1.getFilm(readString(sc));
 			vybranyFilm3.vypisFilm();
+			System.out.println("-----------------");
+			System.out.println("-Pokračujte stisknutím klávesy ENTER-");
+			System.out.println("-----------------");
+			sc.nextLine();
 			break;
-		}
+		}}
 		sc.close();
 	}
 
