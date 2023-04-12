@@ -5,7 +5,7 @@ import java.util.Scanner;
 /*GUITODO:
  * Dodělat hodnocení (hvězdičky atd.)
  * Přidat "film nenalezen v databázi)
- * Přidat seřazení hodnocení filmů viz notebook
+ * Přidat seřazení hodnocení filmů viz notebook...
  */
 public class HlavniTrida {
 	//Mapa bude skladovat filmy, key bude jméno -> zhruba na motivy chatgpt
