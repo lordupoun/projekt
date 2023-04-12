@@ -1,12 +1,12 @@
 package projektpack;
 
-import java.util.ArrayList;
-import java.util.List;
+//import java.util.ArrayList;
+//import java.util.List;
 import java.util.TreeMap;
 
 public class HranyFilm extends Film { //pokud máme rozlišovat dva typy filmů asi mají být odlišné kategorie
 	private TreeMap<String, String> mapaHercu; //vkládám Film -> který bude buď z instance Hraného nebo Animovaného
-	private List<Hodnoceni> listHodnoceni = new ArrayList<>();
+	//private List<Hodnoceni> listHodnoceni = new ArrayList<>();
 	public HranyFilm(String nazev, String rezie, int rok, String herci)//v konstruktoru pomocí stringů, v setu pomocí Treemapy a listu
 	 {
 		super(nazev, rezie, rok); //this.nazev=nazev; //nebo super -> zavolá celý konstruktor z původní třídy; u super záleží na pořádí
@@ -20,12 +20,17 @@ public class HranyFilm extends Film { //pokud máme rozlišovat dva typy filmů 
 		System.out.println("Režie: "+rezie);
 		System.out.println("Rok: "+rok);
 		System.out.println("Herci: "+mapaHercu.keySet());
+		System.out.println("Hodnocení: ");
+		for(Hodnoceni i : listHodnoceni)
+		{
+			System.out.println(i.getBody());
+			System.out.println(i.getSlovniHodnoceni());
+		}
 	}
 	@Override
-	boolean setHodnoceni(Hodnoceni hodnoceniFilmu) {
-		if(hodnoceniFilmu.getBody()>1&&hodnoceniFilmu.getBody()<6)
+	boolean testBodyHodnoceni(int body) { //testuji zvlášť tak aby bodové hodnocení mohlo být vyplněné dříve než slovní
+		if(body>0&&body<6) //nechci v mainu...
 		{
-			listHodnoceni.add(hodnoceniFilmu);
 			return true;
 		}
 		else

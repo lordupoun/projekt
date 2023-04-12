@@ -9,7 +9,7 @@ public abstract class Film {
 	String nazev; //parametry filmu -> nazev, rezie, rok, seznam hercu
 	String rezie;
 	int rok;
-	private List<Hodnoceni> listHodnoceni = new ArrayList<>();
+	protected List<Hodnoceni> listHodnoceni = new ArrayList<>();
 	//private TreeMap<String, String> mapaHercu; //??když to dám sólo, jak to vyřeším, když pak budu chtít přidat víc tříd, kde to bude společný //Na jakejch základech se rozhodovat jestli to tam má nebo nemá bejt -> množství metod?
 	public Film(String nazev, String rezie, int rok)
 	 {
@@ -40,9 +40,9 @@ public abstract class Film {
 	}
 	void setHodnoceni(Hodnoceni hodnoceniFilmu) //dopsat hodnocení do filmu, metoda bude vracet true, jestli splňuje požadavky filmu
 	{
-	listHodnoceni.add(hodnoceniFilmu);
+		listHodnoceni.add(hodnoceniFilmu); //nepůjde volit jaký je to film
 	}
-	abstract boolean testBodyHodnoceni(Hodnoceni hodnoceniFilmu);
+	abstract boolean testBodyHodnoceni(int body);
 }
 //mapa herců/animátorů by mohla být společná, takhle to ale bude univerzálnejší
 //list hodnocení (v pairs body a String)

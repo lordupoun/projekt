@@ -7,7 +7,7 @@ import java.util.TreeMap;
 public class AnimovanyFilm extends Film {
 	private int doporucenyVek;
 	private TreeMap<String, String> mapaAnimatoru;
-	private List<Hodnoceni> listHodnoceni = new ArrayList<>();
+	//private List<Hodnoceni> listHodnoceni = new ArrayList<>();
 	public AnimovanyFilm(String nazev, String rezie, int rok, int doporucenyVek, String animatori)
 	 {
 		super(nazev, rezie, rok);
@@ -25,10 +25,9 @@ public class AnimovanyFilm extends Film {
 		
 	}
 	@Override
-	boolean setHodnoceni(Hodnoceni hodnoceniFilmu) {
-		if(hodnoceniFilmu.getBody()>1&&hodnoceniFilmu.getBody()<11)
+	boolean testBodyHodnoceni(int body) { //testuji zvlášť tak aby bodové hodnocení mohlo být vyplněné dříve než slovní
+		if(body>0&&body<11)
 		{
-			listHodnoceni.add(hodnoceniFilmu);
 			return true;
 		}
 		else

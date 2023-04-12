@@ -1,7 +1,10 @@
 package projektpack;
 
 import java.util.Scanner;
-
+/*GUITODO:
+ * Dodělat hodnocení (hvězdičky atd.)
+ * Přidat "film nenalezen v databázi)
+ */
 public class HlavniTrida {
 	//Mapa bude skladovat filmy, key bude jméno -> zhruba na motivy chatgpt
 	//abstraktní třída zadefinuje film, potom budou třídy hranej a animovanej
@@ -116,20 +119,30 @@ public class HlavniTrida {
 			break;
 		case 4:
 			topDesign();
+			sc.nextLine();
 			System.out.println(" Napište název filmu, který chcete ohodnotit:");
 			Film vybranyFilm2=databaze1.getFilm(readString(sc));
-			System.out.println(" Napiště číselné hodnocení filmu.");
-			Hodnoceni hodnoceniFilmu = new Hodnoceni();
-				do
+			int body = 0;
+			if(vybranyFilm2 instanceof HranyFilm)
+			{
 				{
-					hodnoceniFilmu.setBody(readInt(sc));
+					System.out.println(" Napište číselné hodnocení v rozsahu 1 až 5 hvěziček.");
+					body = readInt(sc);
 				}
-				while(vybranyFilm2.setHodnoceni(hodnoceniFilmu)==false);
-		
-				
-			String slovne = readString(sc);
-			Hodnoceni hodnoceniFilmu = new Hodnoceni();
-			vybranyFilm2.setHodnoceni(hodnoceniFilmu)
+				while(vybranyFilm2.testBodyHodnoceni(body)==false);
+			}
+			else if(vybranyFilm2 instanceof AnimovanyFilm)
+			{
+				{
+					System.out.println(" Napište číselné hodnocení v rozsahu 1 až 10 bodů.");
+					body = readInt(sc);
+				}
+				while(vybranyFilm2.testBodyHodnoceni(body)==false);
+			}
+			sc.nextLine();
+			System.out.println(" Napište slovní hodnocení filmu:");
+			Hodnoceni noveHodnoceni = new Hodnoceni(body, readString(sc));
+			vybranyFilm2.setHodnoceni(noveHodnoceni);
 			
 			break;
 		case 5:
