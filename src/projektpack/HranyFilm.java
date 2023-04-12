@@ -14,18 +14,20 @@ public class HranyFilm extends Film { //pokud máme rozlišovat dva typy filmů 
 		mapaHercu.put(herci, null); // vrátit zpět pokud má být mapa až v extended třídě
 	 }
 	@Override
-	void vypisFilm() {
+	String vypisFilm() {
 		// TODO Auto-generated method stub
-		System.out.println("Název: "+nazev);
+		/*System.out.println("Název: "+nazev);
 		System.out.println("Režie: "+rezie);
 		System.out.println("Rok: "+rok);
 		System.out.println("Herci: "+mapaHercu.keySet());
-		System.out.println("Hodnocení: ");
-		for(Hodnoceni i : listHodnoceni)
+		System.out.println("Hodnocení: ");*/
+		String hodnoceniVypis="";
+		for(Hodnoceni i : listHodnoceni) //možná by to bylo lepší vypisovat přímo tady ->System.out.println();
 		{
-			System.out.println(i.getBody());
-			System.out.println(i.getSlovniHodnoceni());
+			hodnoceniVypis=hodnoceniVypis+"\n Počet hvězdiček: "+i.getBody()+"; Slovní hodnocení: "+i.getSlovniHodnoceni();
 		}
+		
+		return ("Název: "+nazev+"\nRežie: "+rezie+"\nRok: "+rok+"\nHerci: "+mapaHercu.keySet()+"\nHodnocení: "+hodnoceniVypis);
 	}
 	@Override
 	boolean testBodyHodnoceni(int body) { //testuji zvlášť tak aby bodové hodnocení mohlo být vyplněné dříve než slovní

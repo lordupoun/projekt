@@ -1,9 +1,11 @@
 package projektpack;
 
+//import java.util.Map.Entry;
 import java.util.Scanner;
 /*GUITODO:
  * Dodělat hodnocení (hvězdičky atd.)
  * Přidat "film nenalezen v databázi)
+ * Přidat seřazení hodnocení filmů
  */
 public class HlavniTrida {
 	//Mapa bude skladovat filmy, key bude jméno -> zhruba na motivy chatgpt
@@ -14,7 +16,7 @@ public class HlavniTrida {
 		databaze1.addFilmHranyRAW("Forrest Gump", "Zjistim Jmeno", 1993,"Tom Hanks");
 		boolean konecProgramu = false;
 		while(konecProgramu==false) {
-		topDesign();
+		System.out.println("           -Filmotéka 3000-");
 		System.out.println(" 1) Přidat nový film do databáze");
 		System.out.println(" 2) Upravit stávající film");
 		System.out.println(" 3) Smazat stávající film");
@@ -148,9 +150,35 @@ public class HlavniTrida {
 		case 5:
 			topDesign();
 			sc.nextLine();
+			/*for(Entry<String, Film> i : databaze1.getMapa().entrySet())
+			{
+				System.out.println(databaze1.getFilm(i.getKey()).vypisFilm());
+			}
+			System.out.println("-----------------");
+			System.out.println("-Pokračujte stisknutím klávesy ENTER-");
+			System.out.println("-----------------");
+			sc.nextLine();*/
+			/*for(String i : databaze1.getMapa().keySet())
+			{
+				System.out.println(databaze1.getFilm(i).vypisFilm());
+			}*/
+			for(Film i : databaze1.getMapa().values())
+			{
+				System.out.println(i.vypisFilm()+"\n"); //nechci vypisovat vypisFilm(String) podle stringu z mapy, protože Film je objekt (musel by nejdřív najít objekt Filmu podle názvu a potom ho vypsat; Objekt "Forrest Gump" neexistuje, jen objekt v mapě databáze s klíčem Forrest Gump -> jinak se k němu nedostanu. Musel bych z toho udělat jeden příkaz -> vypisFilm(ForrestGump) -> getFilm(Forrest Gump) -> vypis.getFilm(ForrestGump), čímž by ale původní funkce dost ztratily na významu.
+	
+			}
+			System.out.println("-----------------");
+			System.out.println("-Pokračujte stisknutím klávesy ENTER-");
+			System.out.println("-----------------test");
+			sc.nextLine();
+			//databaze1.vypis(ForrestGump);
+			break;
+		case 6:
+			topDesign();
+			sc.nextLine();
 			System.out.println(" Napište název filmu, který chcete vyhledat:");
-			Film vybranyFilm3=databaze1.getFilm(readString(sc));
-			vybranyFilm3.vypisFilm();
+			//Film vybranyFilm3=databaze1.getFilm(readString(sc));
+			System.out.println(databaze1.getFilm(readString(sc)).vypisFilm());
 			System.out.println("-----------------");
 			System.out.println("-Pokračujte stisknutím klávesy ENTER-");
 			System.out.println("-----------------");

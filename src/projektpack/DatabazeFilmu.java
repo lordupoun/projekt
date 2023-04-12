@@ -27,6 +27,14 @@ public class DatabazeFilmu { //do databaze vložím hotový film v mainu
 	{
 		mapaFilmu.remove(nazev);
 	}
+	public TreeMap<String, Film> getMapa()
+	{
+		return mapaFilmu;
+	}
+	/*public void vypis(Film film)
+	{
+		
+	}*/
 	
 }
 //jak jsem to chtěl udělat před tím? dvě třídy sólo, každá s vlastní mapou pro hraný/animovaný film -> takhle vše v jedné mapě

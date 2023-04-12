@@ -23,7 +23,7 @@ public abstract class Film {
 	public String getNazev() {
 		return nazev;
 	}
-	abstract void vypisFilm();
+	abstract String vypisFilm();
 	//metoda pro set herce v rámci třídy film (herce dát sólo poznámka?)
 	//abstract setHodnoceni
 
