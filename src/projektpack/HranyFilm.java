@@ -14,7 +14,7 @@ public class HranyFilm extends Film { //pokud máme rozlišovat dva typy filmů 
 		mapaHercu.put(herci, null); // vrátit zpět pokud má být mapa až v extended třídě
 	 }
 	@Override
-	String vypisFilm() {
+	String vypisFilm() { //Nevhodný na velkej seznam filmů
 		// TODO Auto-generated method stub
 		/*System.out.println("Název: "+nazev);
 		System.out.println("Režie: "+rezie);

@@ -147,7 +147,7 @@ public class HlavniTrida {
 			vybranyFilm2.setHodnoceni(noveHodnoceni);
 			
 			break;
-		case 5:
+		case 5: //nemá vypisovat hodnocení filmů
 			topDesign();
 			sc.nextLine();
 			/*for(Entry<String, Film> i : databaze1.getMapa().entrySet())

@@ -1,8 +1,8 @@
 package projektpack;
 
 public class Hodnoceni {
-	private int body;
-	private String slovniHodnoceni;
+	int body; //protected
+	String slovniHodnoceni; //private
 	Hodnoceni(int body, String slovniHodnoceni)
 	{
 		this.body=body;
