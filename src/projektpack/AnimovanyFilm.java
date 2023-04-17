@@ -6,14 +6,18 @@ import java.util.TreeMap;
 
 public class AnimovanyFilm extends Film {
 	private int doporucenyVek;
-	private TreeMap<String, String> mapaAnimatoru;
+	private TreeMap<String, Osoba> mapaAnimatoru;
 	//private List<Hodnoceni> listHodnoceni = new ArrayList<>();
 	public AnimovanyFilm(String nazev, String rezie, int rok, int doporucenyVek, String animatori)
 	 {
 		super(nazev, rezie, rok);
 		this.doporucenyVek=doporucenyVek;
+		String[] poleAnimatoru = animatori.split(",");
 		mapaAnimatoru = new TreeMap<>();
-		mapaAnimatoru.put(animatori, null);
+		for(String i : poleAnimatoru)
+		{
+		mapaAnimatoru.put(i, null); // vrátit zpět pokud má být mapa až v extended třídě	
+		}
 	 }
 	@Override
 	String vypisFilm() { //přepsat na String co půjde ven
@@ -46,5 +50,13 @@ public class AnimovanyFilm extends Film {
 		}
 		else
 		return false;
+	}
+	@Override
+	String vypisFilmBezH() {
+		return ("Název: "+nazev+"\nRežie: "+rezie+"\nRok: "+rok+"\nVěk: "+doporucenyVek+"\nAnimátoři: "+mapaAnimatoru.keySet());
 	}	
+	@Override
+	TreeMap<String, Osoba> getMapaOsob() {
+		return mapaAnimatoru;
+	}		
 }

@@ -1,5 +1,7 @@
-package projektpack;
-import java.util.TreeMap;
+package projektpack; //
+import java.util.ArrayList;
+import java.util.List;
+import java.util.TreeMap; //DatabazeFilmu jen zprostredkovava pristup do mapy -> vlastne se jedna jen o takovou upravenou mapu s vlastními metodami
 
 public class DatabazeFilmu { //do databaze vložím hotový film v mainu
 	private TreeMap<String, Film> mapaFilmu; //vkládám Film -> který bude buď z instance Hraného nebo Animovaného
@@ -27,10 +29,68 @@ public class DatabazeFilmu { //do databaze vložím hotový film v mainu
 	{
 		mapaFilmu.remove(nazev);
 	}
-	public TreeMap<String, Film> getMapa()
+	public TreeMap<String, Film> getMapa()//zrušit
 	{
 		return mapaFilmu;
 	}
+	public String spolecniHerci() //uživatel by musel specifikovat, že chce jenom herce nebo jenom animátory -> program nemůže vědět jestli myslí herce nebo animátora
+	{
+		List<Film> listVybranychFilmu = new ArrayList<>();
+		String vybraneFilmy=""; //zaměnit za list Filmů, ne String s jejich názvy
+		String prefix="";
+		String finalniVyber="";
+		String f="";
+		for(Film film:mapaFilmu.values())
+		{
+			for(String herec:film.getMapaOsob().keySet())
+			{
+				
+				for(Film film2:mapaFilmu.values())
+				{
+					if(film2.getMapaOsob().containsKey(herec)==true)
+					{
+						prefix=(herec+": ");
+						//vybraneFilmy=(film2.getNazev()+", "+vybraneFilmy);
+						listVybranychFilmu.add(film2);
+					}
+				}
+				finalniVyber=finalniVyber+prefix;
+				for(Film i:listVybranychFilmu)
+				{
+					f=f+i.getNazev();
+				}
+				finalniVyber=finalniVyber+f;
+			}
+			
+		}
+		
+		return finalniVyber;
+	}
+	//public 
+	public String getFilmyOsobyString(String osoba) //herce/animatora
+	{
+		String vybraneFilmy="";
+		for(Film i:mapaFilmu.values())
+		{
+			if(i.getMapaOsob().containsKey(osoba)==true)
+			{
+				vybraneFilmy=(i.getNazev()+", "+vybraneFilmy); //
+			}
+		}
+		return vybraneFilmy;
+	}
+	public List<Film> getFilmyOsoby(String osoba) //!!Pokud by filmy měli více parametrů (hraný by měl i animátory, musel bych to předělat -> záleží ale jak by se to měnilo. Pravděpodobně by se změnil i výpis a pak bych prostě vytvořil více různých metod, pro různé věci) -> getOsoby by vyhodila array více map různých typů osob a metoda v DatabaziFilmu by array prozkoušela
+	{
+		List<Film> listFilmu = new ArrayList<>(); //pro vypsání
+		for(Film i:mapaFilmu.values())
+		{
+			if(i.getMapaOsob().containsKey(osoba)==true)
+			{
+				listFilmu.add(i);
+			}
+		}
+		return listFilmu; 
+	}	
 	/*public void vypis(Film film)
 	{
 		
