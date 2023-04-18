@@ -14,9 +14,9 @@ import java.util.TreeMap;
 //import java.util.TreeMap; //rozložení nechat tak jak je, jen přidat objekty -> seznam lidí se dá kdykoliv smazat a přehodit do jednotlivejch tříd
 //!!Dodělat parametry
 public abstract class Film {
-	protected String nazev; //parametry filmu -> nazev, rezie, rok, seznam hercu //měly by být protected nebo private??
-	protected String rezie; 
-	protected int rok;
+	private String nazev; //parametry filmu -> nazev, rezie, rok, seznam hercu //měly by být protected nebo private??
+	private String rezie; 
+	private int rok;
 	protected List<Hodnoceni> listHodnoceni = new ArrayList<>();
 	//private TreeMap<String, String> mapaHercu; //??když to dám sólo, jak to vyřeším, když pak budu chtít přidat víc tříd, kde to bude společný //Na jakejch základech se rozhodovat jestli to tam má nebo nemá bejt -> množství metod?
 	public Film(String nazev, String rezie, int rok)
@@ -27,6 +27,14 @@ public abstract class Film {
 		//mapaHercu = new TreeMap<>();
 		//mapaHercu.put(herci, null); //případně rozvinout mapu animátorů přímo v třídě animáků (herce má stejně většina filmů)
 	 }
+
+	public String getRezie() {
+		return rezie;
+	}
+
+	public int getRok() {
+		return rok;
+	}
 
 	public String getNazev() {
 		return nazev;

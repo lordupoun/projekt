@@ -39,7 +39,7 @@ public class AnimovanyFilm extends Film {
 			hodnoceniVypis=hodnoceniVypis+"\n Počet bodů: "+i.getBody()+"; Slovní hodnocení: "+i.getSlovniHodnoceni();
 		}
 		
-		return ("Název: "+nazev+"\nRežie: "+rezie+"\nRok: "+rok+"\nVěk: "+doporucenyVek+"\nAnimátoři: "+mapaAnimatoru.keySet()+"\nHodnocení: "+hodnoceniVypis);
+		return ("Název: "+getNazev()+"\nRežie: "+getRezie()+"\nRok: "+getRok()+"\nVěk: "+doporucenyVek+"\nAnimátoři: "+mapaAnimatoru.keySet()+"\nHodnocení: "+hodnoceniVypis);
 		
 	}
 	@Override
@@ -53,7 +53,7 @@ public class AnimovanyFilm extends Film {
 	}
 	@Override
 	String vypisFilmBezH() {
-		return ("Název: "+nazev+"\nRežie: "+rezie+"\nRok: "+rok+"\nVěk: "+doporucenyVek+"\nAnimátoři: "+mapaAnimatoru.keySet());
+		return ("Název: "+getNazev()+"\nRežie: "+getRezie()+"\nRok: "+getRok()+"\nVěk: "+doporucenyVek+"\nAnimátoři: "+mapaAnimatoru.keySet());
 	}	
 	@Override
 	TreeMap<String, Osoba> getMapaOsob() {

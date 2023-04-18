@@ -200,8 +200,9 @@ public class HlavniTrida {
 			topDesign();
 			sc.nextLine();
 			System.out.println(" Zadejte jméno hledaného herce:");
+			String jmenoHerce=readString(sc);
 			System.out.println(" Filmy ve kterých hraje:");
-			System.out.println(databaze1.getFilmyOsobyString(readString(sc)));
+			System.out.println(databaze1.getFilmyOsobyString(jmenoHerce));
 			System.out.println("-----------------");
 			System.out.println("-Pokračujte stisknutím klávesy ENTER-");
 			System.out.println("-----------------");

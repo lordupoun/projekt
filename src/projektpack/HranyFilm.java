@@ -32,7 +32,7 @@ public class HranyFilm extends Film { //pokud máme rozlišovat dva typy filmů 
 			hodnoceniVypis=hodnoceniVypis+"\n Počet hvězdiček: "+i.getBody()+"; Slovní hodnocení: "+i.getSlovniHodnoceni();
 		}
 		
-		return ("Název: "+nazev+"\nRežie: "+rezie+"\nRok: "+rok+"\nHerci: "+mapaHercu.keySet()+"\nHodnocení: "+hodnoceniVypis);
+		return ("Název: "+getNazev()+"\nRežie: "+getRezie()+"\nRok: "+getRok()+"\nHerci: "+mapaHercu.keySet()+"\nHodnocení: "+hodnoceniVypis);
 	}
 	@Override
 	boolean testBodyHodnoceni(int body) { //testuji zvlášť tak aby bodové hodnocení mohlo být vyplněné dříve než slovní
@@ -46,7 +46,7 @@ public class HranyFilm extends Film { //pokud máme rozlišovat dva typy filmů 
 
 	@Override
 	String vypisFilmBezH() {
-		return ("Název: "+nazev+"\nRežie: "+rezie+"\nRok: "+rok+"\nHerci: "+mapaHercu.keySet());
+		return ("Název: "+getNazev()+"\nRežie: "+getRezie()+"\nRok: "+getRok()+"\nHerci: "+mapaHercu.keySet());
 	}
 
 	@Override
