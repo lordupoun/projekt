@@ -58,5 +58,15 @@ public class AnimovanyFilm extends Film {
 	@Override
 	TreeMap<String, Osoba> getMapaOsob() {
 		return mapaAnimatoru;
+	}
+	@Override
+	String vypisFilmSoubor() {
+		String hodnoceniVypis="";
+		for(Hodnoceni i : listHodnoceni) //možná by to bylo lepší vypisovat přímo tady ->System.out.println();
+		{
+			hodnoceniVypis=hodnoceniVypis+","+i.getBody()+","+i.getSlovniHodnoceni();
+		}
+		
+		return ("H; "+getNazev()+"; "+getRezie()+"; "+getRok()+"; "+doporucenyVek+"; "+mapaAnimatoru.keySet()+"; "+hodnoceniVypis);
 	}		
 }

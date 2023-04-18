@@ -52,6 +52,17 @@ public class HranyFilm extends Film { //pokud máme rozlišovat dva typy filmů 
 	@Override
 	TreeMap<String, Osoba> getMapaOsob() {
 		return mapaHercu;
+	}
+
+	@Override
+	String vypisFilmSoubor() {
+		String hodnoceniVypis="";
+		for(Hodnoceni i : listHodnoceni) //možná by to bylo lepší vypisovat přímo tady ->System.out.println();
+		{
+			hodnoceniVypis=hodnoceniVypis+","+i.getBody()+","+i.getSlovniHodnoceni();
+		}
+		
+		return ("H; "+getNazev()+"; "+getRezie()+"; "+getRok()+"; "+mapaHercu.keySet()+";"+hodnoceniVypis);
 	}					
 	
 }

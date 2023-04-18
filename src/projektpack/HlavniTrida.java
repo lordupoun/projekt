@@ -1,5 +1,10 @@
 package projektpack;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.InputMismatchException;
 //import java.util.Map.Entry;
 import java.util.Scanner;
@@ -9,7 +14,7 @@ import java.util.Scanner;
  * Přidat seřazení hodnocení filmů viz notebook...
  */
 public class HlavniTrida {
-	//Mapa bude skladovat filmy, key bude jméno -> zhruba na motivy chatgpt
+	//Mapa bude skladovat filmy, key bude jméno -> zhruba na motivy chatgpt //místo vypisFilm -> vypisFilmu
 	//abstraktní třída zadefinuje film, potom budou třídy hranej a animovanej
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
@@ -207,6 +212,44 @@ public class HlavniTrida {
 			System.out.println("-Pokračujte stisknutím klávesy ENTER-");
 			System.out.println("-----------------");
 			sc.nextLine();
+			break;
+		case 9:
+			topDesign();
+			sc.nextLine();
+			System.out.println(" Napište název filmu, který chcete zapsat do souboru:");
+			String nazevFilmu =readString(sc);
+			File file = new File(System.getProperty("user.dir")+File.separator + "Filmy" + File.separator + nazevFilmu+".txt");
+			file.getParentFile().mkdirs();
+			try (BufferedWriter bw = new BufferedWriter(new FileWriter(file))) {
+			    bw.write(databaze1.getFilm(nazevFilmu).vypisFilmSoubor());
+			    bw.flush();
+			    System.out.println("Soubor "+file.getParentFile()+""+"byl úspěšně vytvořen!");
+			} catch (Exception e) {
+			    System.out.println("Do souboru se nepovedlo zapsat.");
+			}
+			
+			//Film vybranyFilm3=databaze1.getFilm(readString(sc));
+			//System.out.println();
+			System.out.println("-----------------");
+			System.out.println("-Pokračujte stisknutím klávesy ENTER-");
+			System.out.println("-----------------");
+			sc.nextLine();
+			break;
+		case 10:
+			topDesign();
+			sc.nextLine();
+			System.out.println(" Napište název filmu, který chcete přečíst ze souboru:");
+			String nazevFilmu2 =readString(sc);
+			File file2 = new File(System.getProperty("user.dir")+File.separator + "Filmy" + File.separator + nazevFilmu2+".txt");
+			try (BufferedReader br = new BufferedReader(new FileReader(file2))) {
+			    String s;
+			    while ((s = br.readLine()) != null) {
+			        System.out.println(s);
+			    }
+			} catch (Exception e) {
+			    System.out.println("Chyba při čtení ze souboru.");
+			}
+			break;
 		}}
 		sc.close();
 	}

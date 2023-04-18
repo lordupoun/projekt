@@ -43,6 +43,7 @@ public abstract class Film {
 	//metoda pro set herce v rámci třídy film (herce dát sólo poznámka?)
 	//abstract setHodnoceni
 	abstract String vypisFilmBezH();
+	abstract String vypisFilmSoubor();
 	abstract TreeMap<String, Osoba> getMapaOsob();
 	
 
