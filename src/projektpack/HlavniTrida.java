@@ -1,5 +1,6 @@
 package projektpack;
 
+import java.util.InputMismatchException;
 //import java.util.Map.Entry;
 import java.util.Scanner;
 /*GUITODO:
@@ -13,7 +14,8 @@ public class HlavniTrida {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		DatabazeFilmu databaze1 = new DatabazeFilmu();
-		databaze1.addFilmHranyRAW("Forrest Gump", "Zjistim Jmeno", 1993,"Tom Hanks");
+		databaze1.addFilmHranyRAW("Forrest Gump", "Zjistim Jmeno", 1993,"Tom Hanks,Otm Shank");
+		databaze1.addFilmHranyRAW("Zelené Brýle", "Zjistim Jmeno", 1994,"Tom Hanks,Otmar Šank");
 		boolean konecProgramu = false;
 		while(konecProgramu==false) {
 		System.out.println("           -Filmotéka 3000-");
@@ -49,7 +51,7 @@ public class HlavniTrida {
 			switch(switchCislo)
 			{
 			case 1:
-				System.out.println(" Napište jméno herce nebo seznam jejich jmen:");
+				System.out.println(" Napište jméno herce nebo seznam jejich jmen (oddělený čárkami):");
 				sc.nextLine();
 				String herci=readString(sc);
 				HranyFilm movieHrany = new HranyFilm(nazev, rezie, rok, herci); //vymazat objekt po zapsání do databáze?
@@ -147,7 +149,7 @@ public class HlavniTrida {
 			vybranyFilm2.setHodnoceni(noveHodnoceni);
 			
 			break;
-		case 5:
+		case 5: //nemá vypisovat hodnocení filmů
 			topDesign();
 			sc.nextLine();
 			/*for(Entry<String, Film> i : databaze1.getMapa().entrySet())
@@ -162,9 +164,9 @@ public class HlavniTrida {
 			{
 				System.out.println(databaze1.getFilm(i).vypisFilm());
 			}*/
-			for(Film i : databaze1.getMapa().values())
+			for(Film i : databaze1.getMapa().values())//přesunout do DatabazeFilmu, pro jednodušší přístup
 			{
-				System.out.println(i.vypisFilm()+"\n"); //nechci vypisovat vypisFilm(String) podle stringu z mapy, protože Film je objekt (musel by nejdřív najít objekt Filmu podle názvu a potom ho vypsat; Objekt "Forrest Gump" neexistuje, jen objekt v mapě databáze s klíčem Forrest Gump -> jinak se k němu nedostanu. Musel bych z toho udělat jeden příkaz -> vypisFilm(ForrestGump) -> getFilm(Forrest Gump) -> vypis.getFilm(ForrestGump), čímž by ale původní funkce dost ztratily na významu.
+				System.out.println(i.vypisFilmBezH()+"\n"); //nechci vypisovat vypisFilm(String) podle stringu z mapy, protože Film je objekt (musel by nejdřív najít objekt Filmu podle názvu a potom ho vypsat; Objekt "Forrest Gump" neexistuje, jen objekt v mapě databáze s klíčem Forrest Gump -> jinak se k němu nedostanu. Musel bych z toho udělat jeden příkaz -> vypisFilm(ForrestGump) -> getFilm(Forrest Gump) -> vypis.getFilm(ForrestGump), čímž by ale původní funkce dost ztratily na významu.
 	
 			}
 			System.out.println("-----------------");
@@ -184,6 +186,25 @@ public class HlavniTrida {
 			System.out.println("-----------------");
 			sc.nextLine();
 			break;
+		case 7:
+			topDesign();
+			sc.nextLine();
+			System.out.println(databaze1.spolecniHerci());
+			System.out.println("-----------------");
+			System.out.println("-Pokračujte stisknutím klávesy ENTER-");
+			System.out.println("-----------------");
+			sc.nextLine();
+			break;
+		case 8:
+			topDesign();
+			sc.nextLine();
+			System.out.println(" Zadejte jméno hledaného herce:");
+			System.out.println(" Filmy ve kterých hraje:");
+			System.out.println(databaze1.getFilmyOsobyString(readString(sc)));
+			System.out.println("-----------------");
+			System.out.println("-Pokračujte stisknutím klávesy ENTER-");
+			System.out.println("-----------------");
+			sc.nextLine();
 		}}
 		sc.close();
 	}
@@ -196,7 +217,7 @@ public class HlavniTrida {
 			{
 				cislo = sc.nextInt();
 			}
-			catch(NumberFormatException n) //pro špatné zadání čísla
+			catch(InputMismatchException n) //pro špatné zadání čísla
 			{
 				System.out.println("Zadejte prosím celé číslo.");
 				sc.nextLine();

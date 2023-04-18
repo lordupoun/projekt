@@ -1,14 +1,22 @@
 package projektpack; //je to o konvenci, v případě malýho množství tříd je to jedno
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.TreeMap;
+/**
+ * @author lordupoun
+ */
+//příště by každý film mohl mít všechny osoby dohromady a nebo klidně i takhle sólo a při prohledávání by prostě prohledával array různejch skupin lidí (herců, animátorů) -> je to míň náročný na CPU než je mít v jednom (ify je nebo není osoba herec), trochu náročnější na paměť, ale hlavně umožňuje rychlejc vybrat jen určitou skupinu (lepší pro další práci); Herci a animátoři pak můžou bejt objekty aby k nim šlo připsat víc věcí
+//import cv9pack.Employee;
 
 //import java.util.TreeMap; //rozložení nechat tak jak je, jen přidat objekty -> seznam lidí se dá kdykoliv smazat a přehodit do jednotlivejch tříd
-
+//!!Dodělat parametry
 public abstract class Film {
-	String nazev; //parametry filmu -> nazev, rezie, rok, seznam hercu
-	String rezie;
-	int rok;
+	protected String nazev; //parametry filmu -> nazev, rezie, rok, seznam hercu //měly by být protected nebo private??
+	protected String rezie; 
+	protected int rok;
 	protected List<Hodnoceni> listHodnoceni = new ArrayList<>();
 	//private TreeMap<String, String> mapaHercu; //??když to dám sólo, jak to vyřeším, když pak budu chtít přidat víc tříd, kde to bude společný //Na jakejch základech se rozhodovat jestli to tam má nebo nemá bejt -> množství metod?
 	public Film(String nazev, String rezie, int rok)
@@ -26,6 +34,9 @@ public abstract class Film {
 	abstract String vypisFilm();
 	//metoda pro set herce v rámci třídy film (herce dát sólo poznámka?)
 	//abstract setHodnoceni
+	abstract String vypisFilmBezH();
+	abstract TreeMap<String, Osoba> getMapaOsob();
+	
 
 	public void setNazev(String nazev) {
 		this.nazev = nazev;
@@ -41,6 +52,7 @@ public abstract class Film {
 	void setHodnoceni(Hodnoceni hodnoceniFilmu) //dopsat hodnocení do filmu, metoda bude vracet true, jestli splňuje požadavky filmu
 	{
 		listHodnoceni.add(hodnoceniFilmu); //nepůjde volit jaký je to film
+		Collections.sort(listHodnoceni, Comparator.comparing((Hodnoceni h) -> h.getBody()).reversed()); //srovná v listuHodnoceni Hodnoceni h podle bodů // jakej je rozdíl od Collections.sort(manager.getListOfEmployees(), Comparator.comparing(Employee::getEmail)); //Seřadí v listu Employees podle mailů, s upozorněním od Eclipse
 	}
 	abstract boolean testBodyHodnoceni(int body);
 }

@@ -5,16 +5,21 @@ package projektpack;
 import java.util.TreeMap;
 
 public class HranyFilm extends Film { //pokud máme rozlišovat dva typy filmů asi mají být odlišné kategorie
-	private TreeMap<String, String> mapaHercu; //vkládám Film -> který bude buď z instance Hraného nebo Animovaného
+	private TreeMap<String, Osoba> mapaHercu; //vkládám Film -> který bude buď z instance Hraného nebo Animovaného
 	//private List<Hodnoceni> listHodnoceni = new ArrayList<>();
 	public HranyFilm(String nazev, String rezie, int rok, String herci)//v konstruktoru pomocí stringů, v setu pomocí Treemapy a listu
 	 {
 		super(nazev, rezie, rok); //this.nazev=nazev; //nebo super -> zavolá celý konstruktor z původní třídy; u super záleží na pořádí
+		String[] poleHercu = herci.split(","); //zrušit házení přes další proměnnou
 		mapaHercu = new TreeMap<>();
-		mapaHercu.put(herci, null); // vrátit zpět pokud má být mapa až v extended třídě
+		for(String i : poleHercu)
+		{
+		mapaHercu.put(i, null); // vrátit zpět pokud má být mapa až v extended třídě	
+		}
 	 }
+	
 	@Override
-	String vypisFilm() {
+	String vypisFilm() { //Nevhodný na velkej seznam filmů
 		// TODO Auto-generated method stub
 		/*System.out.println("Název: "+nazev);
 		System.out.println("Režie: "+rezie);
@@ -37,6 +42,16 @@ public class HranyFilm extends Film { //pokud máme rozlišovat dva typy filmů 
 		}
 		else
 		return false;
+	}
+
+	@Override
+	String vypisFilmBezH() {
+		return ("Název: "+nazev+"\nRežie: "+rezie+"\nRok: "+rok+"\nHerci: "+mapaHercu.keySet());
+	}
+
+	@Override
+	TreeMap<String, Osoba> getMapaOsob() {
+		return mapaHercu;
 	}					
 	
 }
