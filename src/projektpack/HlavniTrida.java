@@ -214,7 +214,7 @@ public class HlavniTrida {
 			sc.nextLine();
 			break;
 		case 9:
-			topDesign();
+			topDesign(); //upravit výpis herců atd.
 			sc.nextLine();
 			System.out.println(" Napište název filmu, který chcete zapsat do souboru:");
 			String nazevFilmu =readString(sc);
@@ -244,7 +244,7 @@ public class HlavniTrida {
 			try (BufferedReader br = new BufferedReader(new FileReader(file2))) {
 			    String s;
 			    while ((s = br.readLine()) != null) {
-			        System.out.println(s);
+			        System.out.println(s); //řádek se rozloží do pole dle , -> každej prvek z pole podle čísla -> teoreticky by se mohly načítat pouze metodou, zbytek udělat v databázi -> Hraný/Animák -> prvek 0 -> jméno, prvek 5 -> hodnocení, rozděli podle , na body a hodnocení, pole řešit sudý lichý
 			    }
 			} catch (Exception e) {
 			    System.out.println("Chyba při čtení ze souboru.");
