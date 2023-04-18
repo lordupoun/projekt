@@ -35,7 +35,7 @@ public class DatabazeFilmu { //do databaze vložím hotový film v mainu
 	}
 	public String spolecniHerci() //uživatel by musel specifikovat, že chce jenom herce nebo jenom animátory -> program nemůže vědět jestli myslí herce nebo animátora
 	{
-		List<Film> listVybranychFilmu = new ArrayList<>();
+		/*List<Film> listVybranychFilmu = new ArrayList<>();
 		String vybraneFilmy=""; //zaměnit za list Filmů, ne String s jejich názvy
 		String prefix="";
 		String finalniVyber="";
@@ -64,7 +64,92 @@ public class DatabazeFilmu { //do databaze vložím hotový film v mainu
 			
 		}
 		
-		return finalniVyber;
+		return finalniVyber;*/
+		/*for(Film porovnavaciFilm:mapaFilmu.values())
+		{
+			if(porovnavaciFilm!=kontrolovanyFilm) //neplatí pro film ve kterým hraje -> minimálně dva filmy
+			{
+				if(kontrolovanyFilm.getMapaOsob().containsKey(herec)==true)
+				{
+					listVybranychFilmu.add(kontrolovanyFilm.getNazev());
+					if(listVybranychFilmu.contains(porovnavaciFilm.getNazev())==false)
+					{
+						if(vypisHerce==false)
+						{
+						vystup="\n"+herec+": ";
+						vypisHerce=true;
+						}
+						listVybranychFilmu.add(porovnavaciFilm.getNazev());
+						System.out.println(porovnavaciFilm.getNazev());
+						System.out.println(herec);
+					}
+					
+				}
+			}
+			
+		}
+		vypisHerce=false;
+		for(String i:listVybranychFilmu)
+		{
+			vystup=vystup+i+", ";
+		}
+		listVybranychFilmu.clear();*/
+		List<String> listVybranychFilmu = new ArrayList<>(); //algoritmus na hledání kdyby to bylo seřazený?;; šlo by vyřešit mapou <Herec, KolekceFilmů> -> Ta by neustále zabírala paměť -> List prostě občas vysypu
+		List<String> listProvedeno = new ArrayList<>();
+		String vystup="";
+		//String f="";
+		boolean vypisZakladnihoFilmu = false;
+		for(Film kontrolovanyFilm:mapaFilmu.values())
+		{
+			//System.out.println("Kontrolovaný film:"+kontrolovanyFilm.getNazev());
+			for(String herec:kontrolovanyFilm.getMapaOsob().keySet())
+			{
+				//System.out.println("Herec:"+herec);
+				//vystup=herec+": ";
+				for(Film porovnavaciFilm:mapaFilmu.values())
+				{
+					//System.out.println("Porovnávací film:"+porovnavaciFilm.getNazev());
+					if(porovnavaciFilm!=kontrolovanyFilm) //neplatí pro film ve kterým hraje -> minimálně dva filmy;; ify logicky seřazený podle četnosti používání
+					{
+						if(porovnavaciFilm.getMapaOsob().containsKey(herec)==true)
+						{
+							//listVybranychFilmu.add(kontrolovanyFilm.getNazev());
+							if(listVybranychFilmu.contains(porovnavaciFilm.getNazev())==false&&listProvedeno.contains(herec)==false)
+							{
+								//pokud se podmínky splnili, je potřeba právě jednou zapsat i ten první film -> toho jen forcyklama nedocílím
+								if(vypisZakladnihoFilmu==false)
+								{
+									listVybranychFilmu.add(kontrolovanyFilm.getNazev());
+									vystup=vystup+herec+": ";
+									vypisZakladnihoFilmu=true;
+								}
+								listVybranychFilmu.add(porovnavaciFilm.getNazev());
+								listProvedeno.add(herec);
+								//System.out.println(herec);
+								//System.out.println("zapsán");
+							}
+							
+						}
+					}
+					
+				}//herci jsou tam dvakrát a filmy taky dvakrát
+				
+				for(String i:listVybranychFilmu)
+				{
+					vystup=vystup+i+", ";
+				}
+				listVybranychFilmu.clear();
+				if(vypisZakladnihoFilmu==true)
+				{
+					vystup=vystup+"\n";
+				}
+				vypisZakladnihoFilmu=false;	
+			}
+			//vystup=vystup+"\n";
+		}
+		
+		//finalniVyber=finalniVyber+f;
+		return vystup; //dvakrát to projíždí herce: dvě řešení -> List na herce s kontrolou NEBO jeden velkej list na Filmy, kde budou i herci (tak jak budou ve výpisu)
 	}
 	//public 
 	public String getFilmyOsobyString(String osoba) //herce/animatora
