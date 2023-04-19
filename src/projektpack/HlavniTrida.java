@@ -232,7 +232,7 @@ public class HlavniTrida {
 			}
 			
 			//Film vybranyFilm3=databaze1.getFilm(readString(sc));
-			//System.out.println();
+			//System.out.println();zmena
 			System.out.println("-----------------");
 			System.out.println("-Pokračujte stisknutím klávesy ENTER-");
 			System.out.println("-----------------");
