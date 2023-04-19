@@ -1,5 +1,6 @@
 package projektpack;
 
+import java.util.List;
 //import java.util.ArrayList;
 //import java.util.List;
 import java.util.TreeMap;
@@ -10,6 +11,16 @@ public class HranyFilm extends Film { //pokud máme rozlišovat dva typy filmů 
 	public HranyFilm(String nazev, String rezie, int rok, String herci)//v konstruktoru pomocí stringů, v setu pomocí Treemapy a listu
 	 {
 		super(nazev, rezie, rok); //this.nazev=nazev; //nebo super -> zavolá celý konstruktor z původní třídy; u super záleží na pořádí
+		String[] poleHercu = herci.split(","); //zrušit házení přes další proměnnou
+		mapaHercu = new TreeMap<>();
+		for(String i : poleHercu)
+		{
+		mapaHercu.put(i, null); // vrátit zpět pokud má být mapa až v extended třídě	
+		}
+	 }
+	public HranyFilm(String nazev, String rezie, int rok, String herci, List<Hodnoceni> listHodnoceni)//v konstruktoru pomocí stringů, v setu pomocí Treemapy a listu
+	 {
+		super(nazev, rezie, rok, listHodnoceni); //this.nazev=nazev; //nebo super -> zavolá celý konstruktor z původní třídy; u super záleží na pořádí
 		String[] poleHercu = herci.split(","); //zrušit házení přes další proměnnou
 		mapaHercu = new TreeMap<>();
 		for(String i : poleHercu)
@@ -57,14 +68,47 @@ public class HranyFilm extends Film { //pokud máme rozlišovat dva typy filmů 
 	@Override
 	String vypisFilmSoubor() {
 		String hodnoceniVypis="";
+		if(listHodnoceni.isEmpty()==true)
+		{
+			hodnoceniVypis="-";
+		}
+		else
+		{
 		for(Hodnoceni i : listHodnoceni) //možná by to bylo lepší vypisovat přímo tady ->System.out.println();
 		{
-			hodnoceniVypis=hodnoceniVypis+","+i.getBody()+","+i.getSlovniHodnoceni();
+			hodnoceniVypis=hodnoceniVypis+i.getBody()+"/-/"+i.getSlovniHodnoceni()+"/-/";
+		}
+		}
+		String herciVypis="";
+		for(String i : mapaHercu.keySet()) //možná by to bylo lepší vypisovat přímo tady ->System.out.println();
+		{
+			herciVypis=herciVypis+i+",";
 		}
 		
-		return ("H; "+getNazev()+"; "+getRezie()+"; "+getRok()+"; "+mapaHercu.keySet()+";"+hodnoceniVypis);
+		return ("H; "+getNazev()+"; "+getRezie()+"; "+getRok()+"; "+herciVypis+"; "+hodnoceniVypis);
 	}					
-	
+	String vypisFilmSouborJednoduse()
+	{
+		String hodnoceniVypis="";
+		if(listHodnoceni.isEmpty()==true)
+		{
+			hodnoceniVypis="-";
+		}
+		else
+		{
+		for(Hodnoceni i : listHodnoceni) //možná by to bylo lepší vypisovat přímo tady ->System.out.println();
+		{
+			hodnoceniVypis=hodnoceniVypis+i.getBody()+"/-/"+i.getSlovniHodnoceni()+"/-/";
+		}
+		}
+		String herciVypis="";
+		for(String i : mapaHercu.keySet()) //možná by to bylo lepší vypisovat přímo tady ->System.out.println();
+		{
+			herciVypis=herciVypis+i+",";
+		}
+		
+		return ("Hraný\nNázev:/ "+getNazev()+"\nRežie:/ "+getRezie()+"\nRok:/ "+getRok()+"\nHerci:/ "+herciVypis+"\nHodnocení:/ "+hodnoceniVypis);
+	}
 }
 //Film potřebuju uložit do mapy nebo něco, viz cviko
 //takhle mám TreeMap v každý třídě zvlášť (kvůli zadání), kdyby to bylo v třídě Filmu, musel bych možná dělat gettery

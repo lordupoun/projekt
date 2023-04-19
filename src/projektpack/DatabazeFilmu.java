@@ -176,12 +176,73 @@ public class DatabazeFilmu { //do databaze vložím hotový film v mainu
 		}
 		return listFilmu; 
 	}	
+	public void zpracujSoubor(String[] pole)
+	 {
+
+	if(pole[0].equals("H"))
+    {
+    	
+    	HranyFilm novyFilm2 = new HranyFilm(pole[1], pole[2], Integer.parseInt(pole[3]), pole[4], zpracovaniHodnoceni(pole,5));
+    	addFilm(novyFilm2);
+    	//System.out.println("test");
+    }
+	else if(pole[0].equals("A"))
+    {
+    	
+    	AnimovanyFilm novyFilm2 = new AnimovanyFilm(pole[1], pole[2], Integer.parseInt(pole[3]), Integer.parseInt(pole[4]), pole[5], zpracovaniHodnoceni(pole,6));
+    	addFilm(novyFilm2);
+    	//System.out.println("test");
+    }
 	/*public void vypis(Film film)
 	{
 		
 	}*/
 	
 }
+	private List<Hodnoceni> zpracovaniHodnoceni(String[] pole,int i)
+	{
+	//System.out.println(pole[0]); //možná jsem mohl sólo dělat body a sólo herce
+	List<Hodnoceni> listHodnoceni =  new ArrayList<>();
+	if(pole[i].equals("-"))
+	{
+		
+	}
+	else
+	{
+		String[] poleHodnoceni = pole[i].split("/-/");
+    	
+    	int counter = 0;
+    	int bodyHodnoceni=0;
+	for(String i2:poleHodnoceni)
+	{
+		if(counter==0)
+		{
+			bodyHodnoceni=Integer.parseInt(i2);
+			//System.out.println(i);
+			counter=1;
+	        System.out.println("test");
+		}
+		else if(counter==1) //nemůže být jen if
+		{
+			
+			//System.out.println(i);
+			String slovaHodnoceni=i2;
+			Hodnoceni hodnoceniSoubor = new Hodnoceni(bodyHodnoceni, slovaHodnoceni);
+			listHodnoceni.add(hodnoceniSoubor);
+			counter=0;
+		}
+
+		
+	}
+	}
+	return listHodnoceni;
+	}
+	public void zpracujSouborJednoduse(String[] pole) {
+		// TODO Auto-generated method stub
+		pole[0]
+		
+	}
+ }
 //jak jsem to chtěl udělat před tím? dvě třídy sólo, každá s vlastní mapou pro hraný/animovaný film -> takhle vše v jedné mapě
 //jak ID? nechci to udělat jako list
 //výpis je v pořádku i bez ID

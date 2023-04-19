@@ -27,6 +27,15 @@ public abstract class Film {
 		//mapaHercu = new TreeMap<>();
 		//mapaHercu.put(herci, null); //případně rozvinout mapu animátorů přímo v třídě animáků (herce má stejně většina filmů)
 	 }
+	public Film(String nazev, String rezie, int rok, List<Hodnoceni> listHodnoceni)
+	 {
+		this.nazev = nazev;
+		this.rezie = rezie;
+		this.rok=rok;
+		this.listHodnoceni=listHodnoceni;
+		//mapaHercu = new TreeMap<>();
+		//mapaHercu.put(herci, null); //případně rozvinout mapu animátorů přímo v třídě animáků (herce má stejně většina filmů)
+	 }
 
 	public String getRezie() {
 		return rezie;
@@ -40,6 +49,7 @@ public abstract class Film {
 		return nazev;
 	}
 	abstract String vypisFilm();
+	abstract String vypisFilmSouborJednoduse();
 	//metoda pro set herce v rámci třídy film (herce dát sólo poznámka?)
 	//abstract setHodnoceni
 	abstract String vypisFilmBezH();

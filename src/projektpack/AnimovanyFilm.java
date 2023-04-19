@@ -1,5 +1,6 @@
 package projektpack;
 
+import java.util.List;
 //import java.util.ArrayList;
 //import java.util.List;
 import java.util.TreeMap;
@@ -11,6 +12,17 @@ public class AnimovanyFilm extends Film {
 	public AnimovanyFilm(String nazev, String rezie, int rok, int doporucenyVek, String animatori)
 	 {
 		super(nazev, rezie, rok);
+		this.doporucenyVek=doporucenyVek;
+		String[] poleAnimatoru = animatori.split(",");
+		mapaAnimatoru = new TreeMap<>();
+		for(String i : poleAnimatoru)
+		{
+		mapaAnimatoru.put(i, null); // vrátit zpět pokud má být mapa až v extended třídě	
+		}
+	 }
+	public AnimovanyFilm(String nazev, String rezie, int rok, int doporucenyVek, String animatori, List<Hodnoceni> listHodnoceni)
+	 {
+		super(nazev, rezie, rok, listHodnoceni);
 		this.doporucenyVek=doporucenyVek;
 		String[] poleAnimatoru = animatori.split(",");
 		mapaAnimatoru = new TreeMap<>();
@@ -62,11 +74,26 @@ public class AnimovanyFilm extends Film {
 	@Override
 	String vypisFilmSoubor() {
 		String hodnoceniVypis="";
+		if(listHodnoceni.isEmpty()==true)
+		{
+			hodnoceniVypis="-";
+		}
+		else {
 		for(Hodnoceni i : listHodnoceni) //možná by to bylo lepší vypisovat přímo tady ->System.out.println();
 		{
-			hodnoceniVypis=hodnoceniVypis+","+i.getBody()+","+i.getSlovniHodnoceni();
+			hodnoceniVypis=hodnoceniVypis+i.getBody()+"/-/"+i.getSlovniHodnoceni()+"/-/";
 		}
-		
-		return ("H; "+getNazev()+"; "+getRezie()+"; "+getRok()+"; "+doporucenyVek+"; "+mapaAnimatoru.keySet()+"; "+hodnoceniVypis);
+		}
+		String animatoriVypis="";
+		for(String i : mapaAnimatoru.keySet()) //možná by to bylo lepší vypisovat přímo tady ->System.out.println();
+		{
+			animatoriVypis=animatoriVypis+i+",";
+		}
+		return ("A; "+getNazev()+"; "+getRezie()+"; "+getRok()+"; "+doporucenyVek+"; "+animatoriVypis+"; "+hodnoceniVypis);
+	}
+	@Override
+	String vypisFilmSouborJednoduse() {
+		// TODO Auto-generated method stub
+		return null;
 	}		
 }

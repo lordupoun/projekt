@@ -5,7 +5,9 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.util.List;
 //import java.util.Map.Entry;
 import java.util.Scanner;
 /*GUITODO:
@@ -19,7 +21,7 @@ public class HlavniTrida {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		DatabazeFilmu databaze1 = new DatabazeFilmu();
-		databaze1.addFilmHranyRAW("Forrest Gump", "Zjistim Jmeno", 1993,"Tom Hanks,Otm Shank");
+		//databaze1.addFilmHranyRAW("Forrest Gump", "Zjistim Jmeno", 1993,"Tom Hanks,Otm Shank");
 		databaze1.addFilmHranyRAW("Zelené Brýle", "Zjistim Jmeno", 1994,"Tom Hanks,Zjistim Jmeno");
 		databaze1.addFilmHranyRAW("Zelené Brýle 2", "Zjistim Jmeno", 1994,"Tom Hanks,Zjistim Jmeno");
 		boolean konecProgramu = false;
@@ -221,9 +223,10 @@ public class HlavniTrida {
 			File file = new File(System.getProperty("user.dir")+File.separator + "Filmy" + File.separator + nazevFilmu+".txt");
 			file.getParentFile().mkdirs();
 			try (BufferedWriter bw = new BufferedWriter(new FileWriter(file))) {
-			    bw.write(databaze1.getFilm(nazevFilmu).vypisFilmSoubor());
+			    //bw.write(databaze1.getFilm(nazevFilmu).vypisFilmSoubor());
+				bw.write(databaze1.getFilm(nazevFilmu).vypisFilmSouborJednoduse());
 			    bw.flush();
-			    System.out.println("Soubor "+file.getParentFile()+""+"byl úspěšně vytvořen!");
+			    System.out.println("Soubor "+nazevFilmu+".txt ve složce "+file.getParentFile()+" byl úspěšně vytvořen!");
 			} catch (Exception e) {
 			    System.out.println("Do souboru se nepovedlo zapsat.");
 			}
@@ -235,7 +238,7 @@ public class HlavniTrida {
 			System.out.println("-----------------");
 			sc.nextLine();
 			break;
-		case 10:
+		case 10: //čte i více souborů, i když nemusí -> šlo řešit pouhým výpisem, jedna věc na jeden řádek -> šlo by vytvořit "GUI" v souboru Hodnocení:/
 			topDesign();
 			sc.nextLine();
 			System.out.println(" Napište název filmu, který chcete přečíst ze souboru:");
@@ -244,10 +247,32 @@ public class HlavniTrida {
 			try (BufferedReader br = new BufferedReader(new FileReader(file2))) {
 			    String s;
 			    while ((s = br.readLine()) != null) {
-			        System.out.println(s); //řádek se rozloží do pole dle , -> každej prvek z pole podle čísla -> teoreticky by se mohly načítat pouze metodou, zbytek udělat v databázi -> Hraný/Animák -> prvek 0 -> jméno, prvek 5 -> hodnocení, rozděli podle , na body a hodnocení, pole řešit sudý lichý
+			        String[] pole = s.split("/: "); //řádek se rozloží do pole dle , -> každej prvek z pole podle čísla -> teoreticky by se mohly načítat pouze metodou, zbytek udělat v databázi -> Hraný/Animák -> prvek 0 -> jméno, prvek 5 -> hodnocení, rozděli podle , na body a hodnocení, pole řešit sudý lichý
+			        //System.out.println(pole[0]);
+			        //databaze1.zpracujSoubor(pole);
+			        //databaze1.zpracujSouborJednoduse(pole);
+			        
+			        
 			    }
+			    /*while ((s = br.readLine()) != null) {
+			        String[] pole = s.split("; "); //řádek se rozloží do pole dle , -> každej prvek z pole podle čísla -> teoreticky by se mohly načítat pouze metodou, zbytek udělat v databázi -> Hraný/Animák -> prvek 0 -> jméno, prvek 5 -> hodnocení, rozděli podle , na body a hodnocení, pole řešit sudý lichý
+			        //databaze1.zpracujSoubor(pole);//Vice filmu ze souboru
+			       
+			        
+			        
+			    }*/
+			        System.out.println("Film byl úspěšně načten.");
+			        System.out.println("-----------------");
+					System.out.println("-Pokračujte stisknutím klávesy ENTER-");
+					System.out.println("-----------------");
+					sc.nextLine();
+			    //}??
 			} catch (Exception e) {
-			    System.out.println("Chyba při čtení ze souboru.");
+			    System.out.println("Chyba při čtení ze souboru. "+e);
+			    System.out.println("-----------------");
+				System.out.println("-Pokračujte stisknutím klávesy ENTER-");
+				System.out.println("-----------------");
+				sc.nextLine();
 			}
 			break;
 		}}
