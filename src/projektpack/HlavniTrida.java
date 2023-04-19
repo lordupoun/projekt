@@ -224,7 +224,7 @@ public class HlavniTrida {
 			file.getParentFile().mkdirs();
 			try (BufferedWriter bw = new BufferedWriter(new FileWriter(file))) {
 			    //bw.write(databaze1.getFilm(nazevFilmu).vypisFilmSoubor());
-				bw.write(databaze1.getFilm(nazevFilmu).vypisFilmSoubor());
+				bw.write(databaze1.getFilm(nazevFilmu).vypisFilmSouborJednoduse());
 			    bw.flush();
 			    System.out.println("Soubor "+nazevFilmu+".txt ve složce "+file.getParentFile()+" byl úspěšně vytvořen!");
 			} catch (Exception e) {
@@ -249,11 +249,11 @@ public class HlavniTrida {
 			    //String vystup;
 			    List<String> soubor = new ArrayList<>();
 			    while ((s = br.readLine()) != null) {
-			    	databaze1.zpracujSoubor(s);
-			        //String[] pole = s.split(":/ "); //řádek se rozloží do pole dle , -> každej prvek z pole podle čísla -> teoreticky by se mohly načítat pouze metodou, zbytek udělat v databázi -> Hraný/Animák -> prvek 0 -> jméno, prvek 5 -> hodnocení, rozděli podle , na body a hodnocení, pole řešit sudý lichý
+			    	//databaze1.zpracujSoubor(s);
+			        String[] pole = s.split(":/ "); //řádek se rozloží do pole dle , -> každej prvek z pole podle čísla -> teoreticky by se mohly načítat pouze metodou, zbytek udělat v databázi -> Hraný/Animák -> prvek 0 -> jméno, prvek 5 -> hodnocení, rozděli podle , na body a hodnocení, pole řešit sudý lichý
 			        	 //<-Kdyby tu bylo místo pětky počet parametrů, bylo by to víc futureproof
 			        //System.out.println("test");	
-			        //soubor.add(pole[1]);
+			        soubor.add(pole[1]);
 			        	
 			        
 			        //System.out.println(pole[0]);
@@ -262,7 +262,7 @@ public class HlavniTrida {
 			        
 			        
 			    }
-			    //databaze1.zpracujSouborJednoduse(soubor);
+			    databaze1.zpracujSouborJednoduse(soubor);
 			    //System.out.println(soubor.get(0));
 			     //pro možnost využití obou metod
 			    
