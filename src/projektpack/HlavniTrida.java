@@ -22,7 +22,7 @@ public class HlavniTrida {
 		Scanner sc = new Scanner(System.in);
 		DatabazeFilmu databaze1 = new DatabazeFilmu();
 		//databaze1.addFilmHranyRAW("Forrest Gump", "Zjistim Jmeno", 1993,"Tom Hanks,Otm Shank");
-		databaze1.addFilmHranyRAW("Zelené Brýle", "Zjistim Jmeno", 1994,"Tom Hanks,Zjistim Jmeno");
+		//databaze1.addFilmHranyRAW("Zelené Brýle", "Zjistim Jmeno", 1994,"Tom Hanks,Zjistim Jmeno");
 		databaze1.addFilmHranyRAW("Zelené Brýle 2", "Zjistim Jmeno", 1994,"Tom Hanks,Zjistim Jmeno");
 		boolean konecProgramu = false;
 		while(konecProgramu==false) {
@@ -224,7 +224,7 @@ public class HlavniTrida {
 			file.getParentFile().mkdirs();
 			try (BufferedWriter bw = new BufferedWriter(new FileWriter(file))) {
 			    //bw.write(databaze1.getFilm(nazevFilmu).vypisFilmSoubor());
-				bw.write(databaze1.getFilm(nazevFilmu).vypisFilmSouborJednoduse());
+				bw.write(databaze1.getFilm(nazevFilmu).vypisFilmSoubor());
 			    bw.flush();
 			    System.out.println("Soubor "+nazevFilmu+".txt ve složce "+file.getParentFile()+" byl úspěšně vytvořen!");
 			} catch (Exception e) {
@@ -246,14 +246,26 @@ public class HlavniTrida {
 			File file2 = new File(System.getProperty("user.dir")+File.separator + "Filmy" + File.separator + nazevFilmu2+".txt");
 			try (BufferedReader br = new BufferedReader(new FileReader(file2))) {
 			    String s;
+			    //String vystup;
+			    List<String> soubor = new ArrayList<>();
 			    while ((s = br.readLine()) != null) {
-			        String[] pole = s.split("/: "); //řádek se rozloží do pole dle , -> každej prvek z pole podle čísla -> teoreticky by se mohly načítat pouze metodou, zbytek udělat v databázi -> Hraný/Animák -> prvek 0 -> jméno, prvek 5 -> hodnocení, rozděli podle , na body a hodnocení, pole řešit sudý lichý
+			    	databaze1.zpracujSoubor(s);
+			        //String[] pole = s.split(":/ "); //řádek se rozloží do pole dle , -> každej prvek z pole podle čísla -> teoreticky by se mohly načítat pouze metodou, zbytek udělat v databázi -> Hraný/Animák -> prvek 0 -> jméno, prvek 5 -> hodnocení, rozděli podle , na body a hodnocení, pole řešit sudý lichý
+			        	 //<-Kdyby tu bylo místo pětky počet parametrů, bylo by to víc futureproof
+			        //System.out.println("test");	
+			        //soubor.add(pole[1]);
+			        	
+			        
 			        //System.out.println(pole[0]);
-			        //databaze1.zpracujSoubor(pole);
+			        
 			        //databaze1.zpracujSouborJednoduse(pole);
 			        
 			        
 			    }
+			    //databaze1.zpracujSouborJednoduse(soubor);
+			    //System.out.println(soubor.get(0));
+			     //pro možnost využití obou metod
+			    
 			    /*while ((s = br.readLine()) != null) {
 			        String[] pole = s.split("; "); //řádek se rozloží do pole dle , -> každej prvek z pole podle čísla -> teoreticky by se mohly načítat pouze metodou, zbytek udělat v databázi -> Hraný/Animák -> prvek 0 -> jméno, prvek 5 -> hodnocení, rozděli podle , na body a hodnocení, pole řešit sudý lichý
 			        //databaze1.zpracujSoubor(pole);//Vice filmu ze souboru

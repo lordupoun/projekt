@@ -176,21 +176,23 @@ public class DatabazeFilmu { //do databaze vložím hotový film v mainu
 		}
 		return listFilmu; 
 	}	
-	public void zpracujSoubor(String[] pole)
+	public void zpracujSoubor(String s)
 	 {
-
+		String[] pole = s.split("; ");
+		//System.out.println("test");
 	if(pole[0].equals("H"))
     {
     	
-    	HranyFilm novyFilm2 = new HranyFilm(pole[1], pole[2], Integer.parseInt(pole[3]), pole[4], zpracovaniHodnoceni(pole,5));
+    	HranyFilm novyFilm2 = new HranyFilm(pole[1], pole[2], Integer.parseInt(pole[3]), pole[4], zpracovaniHodnoceni(pole[5]));
     	addFilm(novyFilm2);
     	//System.out.println("test");
     }
 	else if(pole[0].equals("A"))
     {
-    	
-    	AnimovanyFilm novyFilm2 = new AnimovanyFilm(pole[1], pole[2], Integer.parseInt(pole[3]), Integer.parseInt(pole[4]), pole[5], zpracovaniHodnoceni(pole,6));
+		//System.out.println(pole[0]);
+    	AnimovanyFilm novyFilm2 = new AnimovanyFilm(pole[1], pole[2], Integer.parseInt(pole[3]), Integer.parseInt(pole[4]), pole[5], zpracovaniHodnoceni(pole[6]));
     	addFilm(novyFilm2);
+    	
     	//System.out.println("test");
     }
 	/*public void vypis(Film film)
@@ -199,18 +201,19 @@ public class DatabazeFilmu { //do databaze vložím hotový film v mainu
 	}*/
 	
 }
-	private List<Hodnoceni> zpracovaniHodnoceni(String[] pole,int i)
+	private List<Hodnoceni> zpracovaniHodnoceni(String radekPole)
 	{
+		//System.out.println("s");
 	//System.out.println(pole[0]); //možná jsem mohl sólo dělat body a sólo herce
 	List<Hodnoceni> listHodnoceni =  new ArrayList<>();
-	if(pole[i].equals("-"))
+	if(radekPole.equals("-"))
 	{
-		
+		//System.out.println("s");
 	}
 	else
 	{
-		String[] poleHodnoceni = pole[i].split("/-/");
-    	
+		String[] poleHodnoceni = radekPole.split("/-/");
+    	//System.out.println("t");
     	int counter = 0;
     	int bodyHodnoceni=0;
 	for(String i2:poleHodnoceni)
@@ -220,7 +223,7 @@ public class DatabazeFilmu { //do databaze vložím hotový film v mainu
 			bodyHodnoceni=Integer.parseInt(i2);
 			//System.out.println(i);
 			counter=1;
-	        System.out.println("test");
+	        //System.out.println("test");
 		}
 		else if(counter==1) //nemůže být jen if
 		{
@@ -237,9 +240,19 @@ public class DatabazeFilmu { //do databaze vložím hotový film v mainu
 	}
 	return listHodnoceni;
 	}
-	public void zpracujSouborJednoduse(String[] pole) {
-		// TODO Auto-generated method stub
-		pole[0]
+	public void zpracujSouborJednoduse(List<String> soubor) {
+		if(soubor.get(0).equals("Hraný"))
+	    {	
+	    //System.out.println(soubor.get(0));
+	    HranyFilm novyFilm2 = new HranyFilm(soubor.get(1), soubor.get(2), Integer.parseInt(soubor.get(3)), soubor.get(4), zpracovaniHodnoceni(soubor.get(5)));
+	    //System.out.println("test");
+    	addFilm(novyFilm2);
+	    }
+	    else if(soubor.get(0).equals("Animovaný"))
+	    {	
+		    HranyFilm novyFilm2 = new HranyFilm(soubor.get(1), soubor.get(2), Integer.parseInt(soubor.get(3)), soubor.get(4), zpracovaniHodnoceni(soubor.get(5)));
+        	addFilm(novyFilm2);
+		    }
 		
 	}
  }

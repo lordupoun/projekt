@@ -66,7 +66,7 @@ public class HranyFilm extends Film { //pokud máme rozlišovat dva typy filmů 
 	}
 
 	@Override
-	String vypisFilmSoubor() {
+	String vypisFilmSoubor() { //více filmů jednoho souboru
 		String hodnoceniVypis="";
 		if(listHodnoceni.isEmpty()==true)
 		{
@@ -87,7 +87,7 @@ public class HranyFilm extends Film { //pokud máme rozlišovat dva typy filmů 
 		
 		return ("H; "+getNazev()+"; "+getRezie()+"; "+getRok()+"; "+herciVypis+"; "+hodnoceniVypis);
 	}					
-	String vypisFilmSouborJednoduse()
+	String vypisFilmSouborJednoduse() //1 soubor, jeden film
 	{
 		String hodnoceniVypis="";
 		if(listHodnoceni.isEmpty()==true)
@@ -107,7 +107,7 @@ public class HranyFilm extends Film { //pokud máme rozlišovat dva typy filmů 
 			herciVypis=herciVypis+i+",";
 		}
 		
-		return ("Hraný\nNázev:/ "+getNazev()+"\nRežie:/ "+getRezie()+"\nRok:/ "+getRok()+"\nHerci:/ "+herciVypis+"\nHodnocení:/ "+hodnoceniVypis);
+		return ("Film:/ Hraný\nNázev:/ "+getNazev()+"\nRežie:/ "+getRezie()+"\nRok:/ "+getRok()+"\nHerci:/ "+herciVypis+"\nHodnocení:/ "+hodnoceniVypis);
 	}
 }
 //Film potřebuju uložit do mapy nebo něco, viz cviko

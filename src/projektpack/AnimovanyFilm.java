@@ -72,7 +72,7 @@ public class AnimovanyFilm extends Film {
 		return mapaAnimatoru;
 	}
 	@Override
-	String vypisFilmSoubor() {
+	String vypisFilmSoubor() { //mohla by být jedna metoda s vypisFilmSoubor() jednoduse
 		String hodnoceniVypis="";
 		if(listHodnoceni.isEmpty()==true)
 		{
@@ -93,7 +93,25 @@ public class AnimovanyFilm extends Film {
 	}
 	@Override
 	String vypisFilmSouborJednoduse() {
-		// TODO Auto-generated method stub
-		return null;
+		String hodnoceniVypis="";
+		if(listHodnoceni.isEmpty()==true)
+		{
+			hodnoceniVypis="-";
+		}
+		else
+		{
+		for(Hodnoceni i : listHodnoceni) //možná by to bylo lepší vypisovat přímo tady ->System.out.println();
+		{
+			hodnoceniVypis=hodnoceniVypis+i.getBody()+"/-/"+i.getSlovniHodnoceni()+"/-/";
+		}
+		}
+		String animatoriVypis="";
+		for(String i : mapaAnimatoru.keySet()) //možná by to bylo lepší vypisovat přímo tady ->System.out.println();
+		{
+			animatoriVypis=animatoriVypis+i+",";
+		}
+		
+		return ("Film: Animovaný\nNázev:/ "+getNazev()+"\nRežie:/ "+getRezie()+"\nRok:/ "+getRok()+"\n Doporučený Věk:/ "+doporucenyVek+"\nHerci:/ "+animatoriVypis+"\nHodnocení:/ "+hodnoceniVypis);
+		//return null;
 	}		
 }

@@ -27,7 +27,7 @@ public abstract class Film {
 		//mapaHercu = new TreeMap<>();
 		//mapaHercu.put(herci, null); //případně rozvinout mapu animátorů přímo v třídě animáků (herce má stejně většina filmů)
 	 }
-	public Film(String nazev, String rezie, int rok, List<Hodnoceni> listHodnoceni)
+	public Film(String nazev, String rezie, int rok, List<Hodnoceni> listHodnoceni) //!!Herci se nastaví ale hodnocení ne, dalo by se změnit
 	 {
 		this.nazev = nazev;
 		this.rezie = rezie;
