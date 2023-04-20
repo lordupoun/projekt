@@ -1,4 +1,5 @@
-package projektpack;
+package projektpack; //POZOR: Metody ZpracujHerce a ZpracujHodnoceni jsou spatne, obe by mely byt v DatabaziFilmu a měly by posílat obsah do konstruktoru tříd HranyFilm a AnimovanyFilm!!
+					 //Z časových důvodů to nebudu měnit, ale ten problém tam je. -> Metoda ZpracujHerce je přímo v třídě HranyFilm, o nic zasadniho nejde, jen vizualni, ale je potreba to poznamenat pro pripadny dalsi reseni
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
