@@ -73,6 +73,21 @@ public abstract class Film {
 		Collections.sort(listHodnoceni, Comparator.comparing((Hodnoceni h) -> h.getBody()).reversed()); //srovná v listuHodnoceni Hodnoceni h podle bodů // jakej je rozdíl od Collections.sort(manager.getListOfEmployees(), Comparator.comparing(Employee::getEmail)); //Seřadí v listu Employees podle mailů, s upozorněním od Eclipse
 	}
 	abstract boolean testBodyHodnoceni(int body);
+	protected String getHodnoceniVypis() {
+		String hodnoceniVypis="";
+		if(listHodnoceni.isEmpty()==true)
+		{
+			hodnoceniVypis="-";
+		}
+		else
+		{
+		for(Hodnoceni i : listHodnoceni) //možná by to bylo lepší vypisovat přímo tady ->System.out.println();
+		{
+			hodnoceniVypis=hodnoceniVypis+i.getBody()+"/-/"+i.getSlovniHodnoceni()+"/-/";
+		}
+		}
+		return hodnoceniVypis;
+	}
 }
 //mapa herců/animátorů by mohla být společná, takhle to ale bude univerzálnejší
 //list hodnocení (v pairs body a String)

@@ -75,47 +75,27 @@ public class HranyFilm extends Film { //pokud máme rozlišovat dva typy filmů 
 
 	@Override
 	String vypisFilmSoubor() { //více filmů jednoho souboru
-		String hodnoceniVypis="";
-		if(listHodnoceni.isEmpty()==true)
-		{
-			hodnoceniVypis="-";
-		}
-		else
-		{
-		for(Hodnoceni i : listHodnoceni) //možná by to bylo lepší vypisovat přímo tady ->System.out.println();
-		{
-			hodnoceniVypis=hodnoceniVypis+i.getBody()+"/-/"+i.getSlovniHodnoceni()+"/-/";
-		}
-		}
+		//String hodnoceniVypis = getHodnoceni();
 		String herciVypis="";
 		for(String i : mapaHercu.keySet()) //možná by to bylo lepší vypisovat přímo tady ->System.out.println();
 		{
 			herciVypis=herciVypis+i+",";
 		}
 		
-		return ("H; "+getNazev()+"; "+getRezie()+"; "+getRok()+"; "+herciVypis+"; "+hodnoceniVypis);
+		return ("H; "+getNazev()+"; "+getRezie()+"; "+getRok()+"; "+herciVypis+"; "+getHodnoceniVypis());
 	}					
 	String vypisFilmSouborJednoduse() //1 soubor, jeden film
 	{
-		String hodnoceniVypis="";
-		if(listHodnoceni.isEmpty()==true)
-		{
-			hodnoceniVypis="-";
-		}
-		else
-		{
-		for(Hodnoceni i : listHodnoceni) //možná by to bylo lepší vypisovat přímo tady ->System.out.println();
-		{
-			hodnoceniVypis=hodnoceniVypis+i.getBody()+"/-/"+i.getSlovniHodnoceni()+"/-/";
-		}
-		}
+		//String hodnoceniVypis = getHodnoceni();
 		String herciVypis="";
 		for(String i : mapaHercu.keySet()) //možná by to bylo lepší vypisovat přímo tady ->System.out.println();
 		{
 			herciVypis=herciVypis+i+",";
 		}
 		
-		return ("Film:/ Hraný\nNázev:/ "+getNazev()+"\nRežie:/ "+getRezie()+"\nRok:/ "+getRok()+"\nHerci:/ "+herciVypis+"\nHodnocení:/ "+hodnoceniVypis);
+		return ("Film:/ Hraný\nNázev:/ "+getNazev()+"\nRežie:/ "+getRezie()+"\nRok:/ "+getRok()+"\nHerci:/ "+herciVypis+"\nHodnocení:/ "+getHodnoceniVypis());
+	
+	
 	}
 }
 //Film potřebuju uložit do mapy nebo něco, viz cviko

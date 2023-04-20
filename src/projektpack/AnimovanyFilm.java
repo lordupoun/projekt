@@ -80,45 +80,22 @@ public class AnimovanyFilm extends Film {
 	}
 	@Override
 	String vypisFilmSoubor() { //mohla by být jedna metoda s vypisFilmSoubor() jednoduse
-		String hodnoceniVypis="";
-		if(listHodnoceni.isEmpty()==true)
-		{
-			hodnoceniVypis="-";
-		}
-		else {
-		for(Hodnoceni i : listHodnoceni) //možná by to bylo lepší vypisovat přímo tady ->System.out.println();
-		{
-			hodnoceniVypis=hodnoceniVypis+i.getBody()+"/-/"+i.getSlovniHodnoceni()+"/-/";
-		}
-		}
-		String animatoriVypis="";
+		String animatoriVypis=""; //Vypis animatoru ve tride Film -> bude obecne vypisovat seznam a je jedno jestli animatoru nebo hercu
 		for(String i : mapaAnimatoru.keySet()) //možná by to bylo lepší vypisovat přímo tady ->System.out.println();
 		{
 			animatoriVypis=animatoriVypis+i+",";
 		}
-		return ("A; "+getNazev()+"; "+getRezie()+"; "+getRok()+"; "+doporucenyVek+"; "+animatoriVypis+"; "+hodnoceniVypis);
+		return ("A; "+getNazev()+"; "+getRezie()+"; "+getRok()+"; "+doporucenyVek+"; "+animatoriVypis+"; "+getHodnoceniVypis());
 	}
 	@Override
 	String vypisFilmSouborJednoduse() {
-		String hodnoceniVypis="";
-		if(listHodnoceni.isEmpty()==true)
-		{
-			hodnoceniVypis="-";
-		}
-		else
-		{
-		for(Hodnoceni i : listHodnoceni) //možná by to bylo lepší vypisovat přímo tady ->System.out.println();
-		{
-			hodnoceniVypis=hodnoceniVypis+i.getBody()+"/-/"+i.getSlovniHodnoceni()+"/-/";
-		}
-		}
 		String animatoriVypis="";
 		for(String i : mapaAnimatoru.keySet()) //možná by to bylo lepší vypisovat přímo tady ->System.out.println();
 		{
 			animatoriVypis=animatoriVypis+i+",";
 		}
 		
-		return ("Film: Animovaný\nNázev:/ "+getNazev()+"\nRežie:/ "+getRezie()+"\nRok:/ "+getRok()+"\n Doporučený Věk:/ "+doporucenyVek+"\nHerci:/ "+animatoriVypis+"\nHodnocení:/ "+hodnoceniVypis);
+		return ("Film: Animovaný\nNázev:/ "+getNazev()+"\nRežie:/ "+getRezie()+"\nRok:/ "+getRok()+"\n Doporučený Věk:/ "+doporucenyVek+"\nHerci:/ "+animatoriVypis+"\nHodnocení:/ "+getHodnoceniVypis());
 		//return null;
 	}		
 }

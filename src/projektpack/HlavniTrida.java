@@ -288,6 +288,14 @@ public class HlavniTrida {
 				sc.nextLine();
 			}
 			break;
+		case 11:
+			DatabazeSQL.vytvorSQL();
+			//for(String i:databaze1.getMapa().keySet())
+			//{
+				DatabazeSQL.vlozMapu(databaze1.getMapa());
+			//}
+			DatabazeSQL.nactiData();
+			break;
 		}}
 		sc.close();
 	}
