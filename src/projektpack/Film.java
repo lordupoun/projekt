@@ -88,7 +88,9 @@ public abstract class Film {
 		}
 		return hodnoceniVypis;
 	}
+	//abstract String getOsobyVypis();
 }
+//Nezapomínej na STATIC (když nechceš spouštět instanci); ABSTRACT (když potřebuješ mít dvě stejně pojmenované ale odlišné metody v extendnutých třídách)
 //mapa herců/animátorů by mohla být společná, takhle to ale bude univerzálnejší
 //list hodnocení (v pairs body a String)
 //mapa herců je společná, tak aby

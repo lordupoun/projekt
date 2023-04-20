@@ -31,7 +31,7 @@ public class HranyFilm extends Film { //pokud máme rozlišovat dva typy filmů 
 	 }
 	private void vytvorListHercu(String herci) {
 		String[] poleHercu = herci.split(","); //zrušit házení přes další proměnnou
-		mapaHercu = new TreeMap<>();
+		mapaHercu = new TreeMap<>(); //!!Příště zvážit jak moc budu v databázi hledat a jak moc vypisovat a případně nevolit mapu
 		for(String i : poleHercu)
 		{
 		mapaHercu.put(i, null); // vrátit zpět pokud má být mapa až v extended třídě	
@@ -76,24 +76,20 @@ public class HranyFilm extends Film { //pokud máme rozlišovat dva typy filmů 
 	@Override
 	String vypisFilmSoubor() { //více filmů jednoho souboru
 		//String hodnoceniVypis = getHodnoceni();
+		return ("H; "+getNazev()+"; "+getRezie()+"; "+getRok()+"; "+getHerciVypis()+"; "+getHodnoceniVypis());
+	}
+	protected String getHerciVypis() {
 		String herciVypis="";
 		for(String i : mapaHercu.keySet()) //možná by to bylo lepší vypisovat přímo tady ->System.out.println();
 		{
 			herciVypis=herciVypis+i+",";
 		}
-		
-		return ("H; "+getNazev()+"; "+getRezie()+"; "+getRok()+"; "+herciVypis+"; "+getHodnoceniVypis());
+		return herciVypis;
 	}					
 	String vypisFilmSouborJednoduse() //1 soubor, jeden film
 	{
-		//String hodnoceniVypis = getHodnoceni();
-		String herciVypis="";
-		for(String i : mapaHercu.keySet()) //možná by to bylo lepší vypisovat přímo tady ->System.out.println();
-		{
-			herciVypis=herciVypis+i+",";
-		}
 		
-		return ("Film:/ Hraný\nNázev:/ "+getNazev()+"\nRežie:/ "+getRezie()+"\nRok:/ "+getRok()+"\nHerci:/ "+herciVypis+"\nHodnocení:/ "+getHodnoceniVypis());
+		return ("Film:/ Hraný\nNázev:/ "+getNazev()+"\nRežie:/ "+getRezie()+"\nRok:/ "+getRok()+"\nHerci:/ "+getHerciVypis()+"\nHodnocení:/ "+getHodnoceniVypis());
 	
 	
 	}

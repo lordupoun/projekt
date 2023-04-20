@@ -80,22 +80,25 @@ public class AnimovanyFilm extends Film {
 	}
 	@Override
 	String vypisFilmSoubor() { //mohla by být jedna metoda s vypisFilmSoubor() jednoduse
+		
+		return ("A; "+getNazev()+"; "+getRezie()+"; "+getRok()+"; "+doporucenyVek+"; "+getAnimatoriVypis()+"; "+getHodnoceniVypis());
+	}
+	protected String getAnimatoriVypis() {
 		String animatoriVypis=""; //Vypis animatoru ve tride Film -> bude obecne vypisovat seznam a je jedno jestli animatoru nebo hercu
 		for(String i : mapaAnimatoru.keySet()) //možná by to bylo lepší vypisovat přímo tady ->System.out.println();
 		{
 			animatoriVypis=animatoriVypis+i+",";
 		}
-		return ("A; "+getNazev()+"; "+getRezie()+"; "+getRok()+"; "+doporucenyVek+"; "+animatoriVypis+"; "+getHodnoceniVypis());
+		return animatoriVypis;
+	}
+	public int getDoporucenyVek() {
+		return doporucenyVek;
 	}
 	@Override
 	String vypisFilmSouborJednoduse() {
-		String animatoriVypis="";
-		for(String i : mapaAnimatoru.keySet()) //možná by to bylo lepší vypisovat přímo tady ->System.out.println();
-		{
-			animatoriVypis=animatoriVypis+i+",";
-		}
 		
-		return ("Film: Animovaný\nNázev:/ "+getNazev()+"\nRežie:/ "+getRezie()+"\nRok:/ "+getRok()+"\n Doporučený Věk:/ "+doporucenyVek+"\nHerci:/ "+animatoriVypis+"\nHodnocení:/ "+getHodnoceniVypis());
+		
+		return ("Film: Animovaný\nNázev:/ "+getNazev()+"\nRežie:/ "+getRezie()+"\nRok:/ "+getRok()+"\n Doporučený Věk:/ "+doporucenyVek+"\nHerci:/ "+getAnimatoriVypis()+"\nHodnocení:/ "+getHodnoceniVypis());
 		//return null;
 	}		
 }

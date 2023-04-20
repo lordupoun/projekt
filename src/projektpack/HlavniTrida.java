@@ -24,7 +24,8 @@ public class HlavniTrida {
 		DatabazeFilmu databaze1 = new DatabazeFilmu();
 		//databaze1.addFilmHranyRAW("Forrest Gump", "Zjistim Jmeno", 1993,"Tom Hanks,Otm Shank");
 		//databaze1.addFilmHranyRAW("Zelené Brýle", "Zjistim Jmeno", 1994,"Tom Hanks,Zjistim Jmeno");
-		databaze1.addFilmHranyRAW("Zelené Brýle 2", "Zjistim Jmeno", 1994,"Tom Hanks,Zjistim Jmeno");
+		//databaze1.addFilmHranyRAW("Zelené Brýle 2", "Zjistim Jmeno", 1994,"Tom Hanks,Zjistim Jmeno");
+		DatabazeSQL.nactiData(databaze1);
 		boolean konecProgramu = false;
 		while(konecProgramu==false) {
 		System.out.println("           -Filmotéka 3000-");
@@ -178,10 +179,7 @@ public class HlavniTrida {
 				System.out.println(i.vypisFilmBezH()+"\n"); //nechci vypisovat vypisFilm(String) podle stringu z mapy, protože Film je objekt (musel by nejdřív najít objekt Filmu podle názvu a potom ho vypsat; Objekt "Forrest Gump" neexistuje, jen objekt v mapě databáze s klíčem Forrest Gump -> jinak se k němu nedostanu. Musel bych z toho udělat jeden příkaz -> vypisFilm(ForrestGump) -> getFilm(Forrest Gump) -> vypis.getFilm(ForrestGump), čímž by ale původní funkce dost ztratily na významu.
 	
 			}
-			System.out.println("-----------------");
-			System.out.println("-Pokračujte stisknutím klávesy ENTER-");
-			System.out.println("-----------------test");
-			sc.nextLine();
+			bottomDesign(sc);
 			//databaze1.vypis(ForrestGump);
 			break;
 		case 6:
@@ -190,19 +188,13 @@ public class HlavniTrida {
 			System.out.println(" Napište název filmu, který chcete vyhledat:");
 			//Film vybranyFilm3=databaze1.getFilm(readString(sc));
 			System.out.println(databaze1.getFilm(readString(sc)).vypisFilm());
-			System.out.println("-----------------");
-			System.out.println("-Pokračujte stisknutím klávesy ENTER-");
-			System.out.println("-----------------");
-			sc.nextLine();
+			bottomDesign(sc);
 			break;
 		case 7:
 			topDesign();
 			sc.nextLine();
 			System.out.println(databaze1.spolecniHerci());
-			System.out.println("-----------------");
-			System.out.println("-Pokračujte stisknutím klávesy ENTER-");
-			System.out.println("-----------------");
-			sc.nextLine();
+			bottomDesign(sc);
 			break;
 		case 8:
 			topDesign();
@@ -211,10 +203,7 @@ public class HlavniTrida {
 			String jmenoHerce=readString(sc);
 			System.out.println(" Filmy ve kterých hraje:");
 			System.out.println(databaze1.getFilmyOsobyString(jmenoHerce));
-			System.out.println("-----------------");
-			System.out.println("-Pokračujte stisknutím klávesy ENTER-");
-			System.out.println("-----------------");
-			sc.nextLine();
+			bottomDesign(sc);
 			break;
 		case 9:
 			topDesign(); //upravit výpis herců atd.
@@ -234,10 +223,7 @@ public class HlavniTrida {
 			
 			//Film vybranyFilm3=databaze1.getFilm(readString(sc));
 			//System.out.println();zmena
-			System.out.println("-----------------");
-			System.out.println("-Pokračujte stisknutím klávesy ENTER-");
-			System.out.println("-----------------");
-			sc.nextLine();
+			bottomDesign(sc);
 			break;
 		case 10: //čte i více souborů, i když nemusí -> šlo řešit pouhým výpisem, jedna věc na jeden řádek -> šlo by vytvořit "GUI" v souboru Hodnocení:/
 			topDesign();
@@ -275,29 +261,33 @@ public class HlavniTrida {
 			        
 			    }*/
 			        System.out.println("Film byl úspěšně načten.");
-			        System.out.println("-----------------");
-					System.out.println("-Pokračujte stisknutím klávesy ENTER-");
-					System.out.println("-----------------");
-					sc.nextLine();
-			    //}??
+			        bottomDesign(sc);
 			} catch (Exception e) {
 			    System.out.println("Chyba při čtení ze souboru. "+e);
-			    System.out.println("-----------------");
-				System.out.println("-Pokračujte stisknutím klávesy ENTER-");
-				System.out.println("-----------------");
-				sc.nextLine();
+			    bottomDesign(sc);
 			}
 			break;
 		case 11:
-			DatabazeSQL.vytvorSQL();
+			//DatabazeSQL.SmazatObsahDatabaze();
+			//DatabazeSQL.vytvorSQL();
 			//for(String i:databaze1.getMapa().keySet())
 			//{
-				DatabazeSQL.vlozMapu(databaze1.getMapa());
+			
 			//}
-			DatabazeSQL.nactiData();
+			DatabazeSQL.SmazatObsahDatabaze();
+			DatabazeSQL.vlozMapu(databaze1.getMapa()); //mohla by být jenom databáze
+		
+			//vymazat databazi
 			break;
 		}}
 		sc.close();
+	}
+
+	private static void bottomDesign(Scanner sc) {
+		System.out.println("-----------------");
+		System.out.println("-Pokračujte stisknutím klávesy ENTER-");
+		System.out.println("-----------------");
+		sc.nextLine();
 	}
 
 	public static int readInt(Scanner sc)
