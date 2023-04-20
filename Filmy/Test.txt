@@ -1,0 +1,6 @@
+Film:/ Hraný
+Název:/ Test
+Režie:/ Zjistim Jmeno
+Rok:/ 1994
+Herci:/ Tom Hanks,Zjistim Jmeno,
+Hodnocení:/ 1/-/Dobry/-/

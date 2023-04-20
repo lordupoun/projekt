@@ -201,7 +201,7 @@ public class DatabazeFilmu { //do databaze vložím hotový film v mainu
 	}*/
 	
 }
-	private List<Hodnoceni> zpracovaniHodnoceni(String radekPole)
+	protected static List<Hodnoceni> zpracovaniHodnoceni(String radekPole)
 	{
 		//System.out.println("s");
 	//System.out.println(pole[0]); //možná jsem mohl sólo dělat body a sólo herce

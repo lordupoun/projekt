@@ -17,7 +17,7 @@ public abstract class Film {
 	private String nazev; //parametry filmu -> nazev, rezie, rok, seznam hercu //měly by být protected nebo private??
 	private String rezie; 
 	private int rok;
-	protected List<Hodnoceni> listHodnoceni = new ArrayList<>();
+	protected List<Hodnoceni> listHodnoceni = new ArrayList<>(); //Příště dát proměnné protected a řadit package
 	//private TreeMap<String, String> mapaHercu; //??když to dám sólo, jak to vyřeším, když pak budu chtít přidat víc tříd, kde to bude společný //Na jakejch základech se rozhodovat jestli to tam má nebo nemá bejt -> množství metod?
 	public Film(String nazev, String rezie, int rok)
 	 {
@@ -36,7 +36,6 @@ public abstract class Film {
 		//mapaHercu = new TreeMap<>();
 		//mapaHercu.put(herci, null); //případně rozvinout mapu animátorů přímo v třídě animáků (herce má stejně většina filmů)
 	 }
-
 	public String getRezie() {
 		return rezie;
 	}

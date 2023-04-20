@@ -13,23 +13,30 @@ public class AnimovanyFilm extends Film {
 	 {
 		super(nazev, rezie, rok);
 		this.doporucenyVek=doporucenyVek;
+		vytvorListAnimatoru(animatori);
+	 }
+	private void vytvorListAnimatoru(String animatori) {
 		String[] poleAnimatoru = animatori.split(",");
 		mapaAnimatoru = new TreeMap<>();
 		for(String i : poleAnimatoru)
 		{
 		mapaAnimatoru.put(i, null); // vrátit zpět pokud má být mapa až v extended třídě	
 		}
-	 }
+	}
 	public AnimovanyFilm(String nazev, String rezie, int rok, int doporucenyVek, String animatori, List<Hodnoceni> listHodnoceni)
 	 {
 		super(nazev, rezie, rok, listHodnoceni);
 		this.doporucenyVek=doporucenyVek;
-		String[] poleAnimatoru = animatori.split(",");
-		mapaAnimatoru = new TreeMap<>();
-		for(String i : poleAnimatoru)
-		{
-		mapaAnimatoru.put(i, null); // vrátit zpět pokud má být mapa až v extended třídě	
-		}
+		vytvorListAnimatoru(animatori);
+		
+	 }
+	public AnimovanyFilm(String nazev, String rezie, int rok, int doporucenyVek, String animatori, String hodnoceni)
+	 {
+		super(nazev, rezie, rok);
+		listHodnoceni=DatabazeFilmu.zpracovaniHodnoceni(hodnoceni);
+		this.doporucenyVek=doporucenyVek;
+		vytvorListAnimatoru(animatori);
+		
 	 }
 	@Override
 	String vypisFilm() { //přepsat na String co půjde ven

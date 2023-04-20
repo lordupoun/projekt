@@ -11,24 +11,32 @@ public class HranyFilm extends Film { //pokud máme rozlišovat dva typy filmů 
 	public HranyFilm(String nazev, String rezie, int rok, String herci)//v konstruktoru pomocí stringů, v setu pomocí Treemapy a listu
 	 {
 		super(nazev, rezie, rok); //this.nazev=nazev; //nebo super -> zavolá celý konstruktor z původní třídy; u super záleží na pořádí
-		String[] poleHercu = herci.split(","); //zrušit házení přes další proměnnou
-		mapaHercu = new TreeMap<>();
-		for(String i : poleHercu)
-		{
-		mapaHercu.put(i, null); // vrátit zpět pokud má být mapa až v extended třídě	
-		}
+		vytvorListHercu(herci); //!!Pro příště -> Vytvoř list herců bude mít pro Hraný i Animák společnou metodu v DatabazeFilmu, kam se pošle String a on z něj naseká MapuOsob, která se uloží do objektu daného filmu (bude se předávat, ale teď to není priorita -> šlo by jen o to aby to bylo víc standardizovaný, ale zase tu nechci tvořit kód, kterej bude zbytečně alokovat paměť na předávání map, když to není potřeba -> nechám to v třídách Filmů -> max udělat mapuHercu společnou pro všechny a metodu přesunout do třídy Film, ale to je teď zbytečný, protože Animovanej film by neměl mít herce -> i když by to asi nevadilo -> Stejně se na to ukazuje ukazatelama)
 	 }
 	public HranyFilm(String nazev, String rezie, int rok, String herci, List<Hodnoceni> listHodnoceni)//v konstruktoru pomocí stringů, v setu pomocí Treemapy a listu
 	 {
 		super(nazev, rezie, rok, listHodnoceni); //this.nazev=nazev; //nebo super -> zavolá celý konstruktor z původní třídy; u super záleží na pořádí
+		vytvorListHercu(herci);
+	 }
+	public HranyFilm(String nazev, String rezie, int rok, String herci, String hodnoceni)//Pro jednoduché vložení filmu
+	 {
+		super(nazev, rezie, rok); //this.nazev=nazev; //nebo super -> zavolá celý konstruktor z původní třídy; u super záleží na pořádí
+		listHodnoceni=DatabazeFilmu.zpracovaniHodnoceni(hodnoceni);
+		vytvorListHercu(herci);
+	 }
+	public HranyFilm(String nazev, String rezie, int rok, TreeMap<String,Osoba> herci, List<Hodnoceni> listHodnoceni)//Pro imporotvání filmu s mapou a listem
+	 {
+		super(nazev, rezie, rok, listHodnoceni); //this.nazev=nazev; //nebo super -> zavolá celý konstruktor z původní třídy; u super záleží na pořádí
+		mapaHercu=herci;
+	 }
+	private void vytvorListHercu(String herci) {
 		String[] poleHercu = herci.split(","); //zrušit házení přes další proměnnou
 		mapaHercu = new TreeMap<>();
 		for(String i : poleHercu)
 		{
 		mapaHercu.put(i, null); // vrátit zpět pokud má být mapa až v extended třídě	
 		}
-	 }
-	
+	}
 	@Override
 	String vypisFilm() { //Nevhodný na velkej seznam filmů
 		// TODO Auto-generated method stub
