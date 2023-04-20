@@ -25,7 +25,7 @@ public class DatabazeSQL {
                  " REZIE          TEXT    NOT NULL, " +
                  " ROK            REAL    NOT NULL, " +
                  " VEK            REAL    NOT NULL, " +
-                 " HERCI          TEXT    NOT NULL, " +
+                 " ANIMATORI      TEXT    NOT NULL, " +
                  " HODNOCENI      TEXT" +
                  ")";
          stmt.executeUpdate(sql);
@@ -68,12 +68,13 @@ public class DatabazeSQL {
            else if(film instanceof AnimovanyFilm) //for each Film z mapy
            {
         	   //System.out.println("test");
-        	   String sql = "INSERT INTO AnimovanyFilm (JMENO, REZIE, ROK, VEK, ANIMATORI, HODNOCENI) " +
-        	             "VALUES ('"+film.getNazev() + "', '" + film.getRezie() + "', " +
-        	             film.getRok() + ", '" + ((AnimovanyFilm) film).getDoporucenyVek() + ", '" + ((AnimovanyFilm) film).getAnimatoriVypis() + "', '" + film.getHodnoceniVypis() + "')";
-
+        	   String sql2 = "INSERT INTO AnimovanyFilm (JMENO, REZIE, ROK, VEK, ANIMATORI, HODNOCENI) " +
+        	             "VALUES ('" + film.getNazev() + "', '" + film.getRezie() + "', " +
+        	             film.getRok() + ", '" + ((AnimovanyFilm) film).getDoporucenyVek() + "', '" + ((AnimovanyFilm) film).getAnimatoriVypis() + "', '" + film.getHodnoceniVypis() + "')";
+        	   
            
-           stmt.executeUpdate(sql);
+           stmt.executeUpdate(sql2);
+           //System.out.println("test");
            }
            }
            stmt.close();
@@ -101,7 +102,7 @@ public class DatabazeSQL {
            stmt = conn.createStatement();
            ResultSet rs = stmt.executeQuery( "SELECT * FROM HranyFilm;" );
            while ( rs.next() ) {
-              //int id = rs.getInt("ID");
+              /*//int id = rs.getInt("ID");
         	  //String typ = rs.getString("TYP");
               String name = rs.getString("JMENO");
               String rezie = rs.getString("REZIE");
@@ -114,13 +115,13 @@ public class DatabazeSQL {
               System.out.println( "REZISER = " + rezie );
               System.out.println( "HERCI = " + herci );
               System.out.println( "HODNOCENI = " + hodnoceni );
-              System.out.println();
+              System.out.println();*/
               HranyFilm hfilm = new HranyFilm(rs.getString("JMENO"),rs.getString("REZIE"),rs.getInt("ROK"),rs.getString("HERCI"),rs.getString("HODNOCENI"));
               databaze.addFilm(hfilm);
            }
            ResultSet rs2 = stmt.executeQuery( "SELECT * FROM AnimovanyFilm;" );
            while ( rs2.next() ) {
-               //int id = rs.getInt("ID");
+               /*//int id = rs.getInt("ID");
          	   //String typ = rs.getString("TYP");
                String name = rs.getString("JMENO");
                String rezie = rs.getString("REZIE");
@@ -133,7 +134,9 @@ public class DatabazeSQL {
                System.out.println( "REZISER = " + rezie );
                System.out.println( "HERCI = " + hodnoceni );
                System.out.println( "HODNOCENI = " + hodnoceni );
-               System.out.println();
+               System.out.println();*/
+               AnimovanyFilm afilm = new AnimovanyFilm(rs2.getString("JMENO"),rs2.getString("REZIE"),rs2.getInt("ROK"),rs2.getInt("VEK"),rs2.getString("ANIMATORI"),rs2.getString("HODNOCENI"));
+               databaze.addFilm(afilm);
             }
            rs.close();
            stmt.close();

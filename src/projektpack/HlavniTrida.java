@@ -25,6 +25,7 @@ public class HlavniTrida {
 		//databaze1.addFilmHranyRAW("Forrest Gump", "Zjistim Jmeno", 1993,"Tom Hanks,Otm Shank");
 		//databaze1.addFilmHranyRAW("Zelené Brýle", "Zjistim Jmeno", 1994,"Tom Hanks,Zjistim Jmeno");
 		//databaze1.addFilmHranyRAW("Zelené Brýle 2", "Zjistim Jmeno", 1994,"Tom Hanks,Zjistim Jmeno");
+		//DatabazeSQL.vytvorSQL();
 		DatabazeSQL.nactiData(databaze1);
 		boolean konecProgramu = false;
 		while(konecProgramu==false) {
