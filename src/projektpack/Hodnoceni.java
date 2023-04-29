@@ -1,8 +1,8 @@
 package projektpack;
 
 public class Hodnoceni {
-	int body; //protected
-	String slovniHodnoceni; //private
+	private int body; 
+	private String slovniHodnoceni; 
 	Hodnoceni(int body, String slovniHodnoceni)
 	{
 		this.body=body;
@@ -16,13 +16,6 @@ public class Hodnoceni {
 	{
 		return slovniHodnoceni;
 	}
-	/*public void setBody(int body)
-	{
-		this.body=body;
-	}
-	public void setSlovniHodnoceni(String slovniHodnoceni)
-	{
-		this.slovniHodnoceni=slovniHodnoceni;
-	}*/
+
 	
 }

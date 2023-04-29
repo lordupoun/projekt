@@ -1,6 +1,4 @@
-package projektpack; //POZOR: Metody ZpracujHerce a ZpracujHodnoceni jsou spatne, obe by mely byt v DatabaziFilmu a měly by posílat obsah do konstruktoru tříd HranyFilm a AnimovanyFilm!!
-					 //Z časových důvodů to nebudu měnit, ale ten problém tam je. -> Metoda ZpracujHerce je přímo v třídě HranyFilm, o nic zasadniho nejde, jen vizualni, ale je potreba to poznamenat pro pripadny dalsi reseni
-
+package projektpack; 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -9,23 +7,13 @@ import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
-//import java.util.Map.Entry;
 import java.util.Scanner;
-/*GUITODO:
- * Dodělat hodnocení (hvězdičky atd.)
- * Přidat "film nenalezen v databázi)
- * Přidat seřazení hodnocení filmů viz notebook...
- */
+
 public class HlavniTrida {
-	//Mapa bude skladovat filmy, key bude jméno -> zhruba na motivy chatgpt //místo vypisFilm -> vypisFilmu
-	//abstraktní třída zadefinuje film, potom budou třídy hranej a animovanej
+	
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		DatabazeFilmu databaze1 = new DatabazeFilmu();
-		//databaze1.addFilmHranyRAW("Forrest Gump", "Zjistim Jmeno", 1993,"Tom Hanks,Otm Shank");
-		//databaze1.addFilmHranyRAW("Zelené Brýle", "Zjistim Jmeno", 1994,"Tom Hanks,Zjistim Jmeno");
-		//databaze1.addFilmHranyRAW("Zelené Brýle 2", "Zjistim Jmeno", 1994,"Tom Hanks,Zjistim Jmeno");
-		//DatabazeSQL.vytvorSQL();
 		DatabazeSQL.nactiData(databaze1);
 		boolean konecProgramu = false;
 		while(konecProgramu==false) {
@@ -42,7 +30,8 @@ public class HlavniTrida {
 		System.out.println("-----------------------------------");
 		System.out.println(" 9) Uložit informace o filmu do souboru");
 		System.out.println("10) Načíst informace o filmu ze souboru");
-		//System.out.println("10) test.");
+		System.out.println("-----------------------------------");
+		System.out.println("11) Uložit a ukončit");
 		switch(readInt(sc)) 
 		{
 		case 1:
@@ -65,7 +54,7 @@ public class HlavniTrida {
 				System.out.println(" Napište jméno herce nebo seznam jejich jmen (oddělený čárkami):");
 				sc.nextLine();
 				String herci=readString(sc);
-				HranyFilm movieHrany = new HranyFilm(nazev, rezie, rok, herci); //vymazat objekt po zapsání do databáze?
+				HranyFilm movieHrany = new HranyFilm(nazev, rezie, rok, herci); 
 				databaze1.addFilm(movieHrany);
 				break;
 			case 2:
@@ -74,8 +63,8 @@ public class HlavniTrida {
 				System.out.println(" Napište jméno animátora nebo seznam jejich jmen (oddělený čárkami):");
 				sc.nextLine();
 				String animatori=readString(sc);
-				databaze1.addFilmAnimovanyRAW(nazev, rezie, rok, vek, animatori); //ušetřím proměnnou movieHrany ...
-				break;	//spojit herce a animatory dohromady?
+				databaze1.addFilmAnimovanyRAW(nazev, rezie, rok, vek, animatori); 
+				break;	
 			}
 			System.out.println("------------------------------");
 			System.out.println("Film byl vložen do databáze.");
@@ -84,7 +73,8 @@ public class HlavniTrida {
 			topDesign();
 			sc.nextLine();
 			System.out.println(" Napište název filmu, který chcete upravit:");
-			Film vybranyFilm=databaze1.getFilm(readString(sc));
+			Film vybranyFilm = readFilm(sc, databaze1);
+
 			System.out.println(" Zvolte parametr, který chcete upravit:");
 			System.out.println();
 			topDesign();
@@ -103,25 +93,49 @@ public class HlavniTrida {
 			switch(readInt(sc)) 
 			{
 			case 1:
-				System.out.println(" Zadej název:");
+				System.out.println(" Zadejte nový název filmu:");
+				System.out.println(" test:"+vybranyFilm.getNazev());
 				sc.nextLine();
-				vybranyFilm.setNazev(readString(sc));
+				Film zamena = vybranyFilm;
+				databaze1.deleteFilm(vybranyFilm.getNazev());
+				zamena.setNazev(readString(sc));
+				
+				
+				databaze1.addFilm(zamena);
+				
+				
+				
+				
 			break;				
 			case 2:
+				System.out.println(" Zadejte novou režii filmu:");
 				sc.nextLine();
 				vybranyFilm.setRezie(readString(sc));
 			break;
 			case 3:
+				System.out.println(" Zadejte nový rok filmu:");
 				sc.nextLine();
 				vybranyFilm.setRok(Integer.parseInt(readString(sc)));
 			break;
-			case 4:
+			case 4:			
 				sc.nextLine();
-				//vybranyFilm.setHerci(readString(sc));
+				if(vybranyFilm instanceof HranyFilm)
+				{
+					System.out.println(" Zadejte nový seznam herců oddělený čárkami:");
+					((HranyFilm) vybranyFilm).vytvorListHercu(readString(sc));
+				}
+				else
+				{
+					System.out.println(" Zadejte nový seznam animátorů oddělený čárkami:");
+					((AnimovanyFilm) vybranyFilm).vytvorListAnimatoru(readString(sc));
+				}
+
+				
 			break;
 			case 5:
+				System.out.println(" Zadejte nový doporučený věk diváka:");
 				sc.nextLine();
-				vybranyFilm.setRok(Integer.parseInt(readString(sc)));
+				((AnimovanyFilm) vybranyFilm).setDoporucenyVek(Integer.parseInt(readString(sc)));
 			break;
 			}
 			break;
@@ -129,14 +143,14 @@ public class HlavniTrida {
 			topDesign();
 			sc.nextLine();
 			System.out.println(" Napište název filmu, který chcete smazat:");
-			databaze1.deleteFilm(readString(sc));
+			databaze1.deleteFilm(readFilm(sc,databaze1).getNazev());
 			System.out.println(" Film byl vymazán z databáze.");
 			break;
 		case 4:
 			topDesign();
 			sc.nextLine();
 			System.out.println(" Napište název filmu, který chcete ohodnotit:");
-			Film vybranyFilm2=databaze1.getFilm(readString(sc));
+			Film vybranyFilm2=readFilm(sc,databaze1);
 			int body = 0;
 			if(vybranyFilm2 instanceof HranyFilm)
 			{
@@ -160,35 +174,22 @@ public class HlavniTrida {
 			vybranyFilm2.setHodnoceni(noveHodnoceni);
 			
 			break;
-		case 5: //nemá vypisovat hodnocení filmů
+		case 5: 
 			topDesign();
 			sc.nextLine();
-			/*for(Entry<String, Film> i : databaze1.getMapa().entrySet())
+			
+			for(Film i : databaze1.getMapa().values())
 			{
-				System.out.println(databaze1.getFilm(i.getKey()).vypisFilm());
-			}
-			System.out.println("-----------------");
-			System.out.println("-Pokračujte stisknutím klávesy ENTER-");
-			System.out.println("-----------------");
-			sc.nextLine();*/
-			/*for(String i : databaze1.getMapa().keySet())
-			{
-				System.out.println(databaze1.getFilm(i).vypisFilm());
-			}*/
-			for(Film i : databaze1.getMapa().values())//přesunout do DatabazeFilmu, pro jednodušší přístup
-			{
-				System.out.println(i.vypisFilmBezH()+"\n"); //nechci vypisovat vypisFilm(String) podle stringu z mapy, protože Film je objekt (musel by nejdřív najít objekt Filmu podle názvu a potom ho vypsat; Objekt "Forrest Gump" neexistuje, jen objekt v mapě databáze s klíčem Forrest Gump -> jinak se k němu nedostanu. Musel bych z toho udělat jeden příkaz -> vypisFilm(ForrestGump) -> getFilm(Forrest Gump) -> vypis.getFilm(ForrestGump), čímž by ale původní funkce dost ztratily na významu.
+				System.out.println(i.vypisFilmBezH()+"\n"); 
 	
 			}
-			bottomDesign(sc);
-			//databaze1.vypis(ForrestGump);
+			bottomDesign(sc);			
 			break;
 		case 6:
 			topDesign();
 			sc.nextLine();
-			System.out.println(" Napište název filmu, který chcete vyhledat:");
-			//Film vybranyFilm3=databaze1.getFilm(readString(sc));
-			System.out.println(databaze1.getFilm(readString(sc)).vypisFilm());
+			System.out.println(" Napište název filmu, který chcete vyhledat:");			
+			System.out.println(readFilm(sc,databaze1).vypisFilm());
 			bottomDesign(sc);
 			break;
 		case 7:
@@ -207,60 +208,37 @@ public class HlavniTrida {
 			bottomDesign(sc);
 			break;
 		case 9:
-			topDesign(); //upravit výpis herců atd.
+			topDesign(); 
 			sc.nextLine();
 			System.out.println(" Napište název filmu, který chcete zapsat do souboru:");
-			String nazevFilmu =readString(sc);
+			String nazevFilmu =readFilm(sc,databaze1).getNazev();
 			File file = new File(System.getProperty("user.dir")+File.separator + "Filmy" + File.separator + nazevFilmu+".txt");
 			file.getParentFile().mkdirs();
-			try (BufferedWriter bw = new BufferedWriter(new FileWriter(file))) {
-			    //bw.write(databaze1.getFilm(nazevFilmu).vypisFilmSoubor());
+			try (BufferedWriter bw = new BufferedWriter(new FileWriter(file))) {			  
 				bw.write(databaze1.getFilm(nazevFilmu).vypisFilmSouborJednoduse());
 			    bw.flush();
 			    System.out.println("Soubor "+nazevFilmu+".txt ve složce "+file.getParentFile()+" byl úspěšně vytvořen!");
 			} catch (Exception e) {
-			    System.out.println("Do souboru se nepovedlo zapsat.");
+			    System.out.println("Chyba při zápisu do souboru. "+e);
 			}
 			
-			//Film vybranyFilm3=databaze1.getFilm(readString(sc));
-			//System.out.println();zmena
+			
 			bottomDesign(sc);
 			break;
-		case 10: //čte i více souborů, i když nemusí -> šlo řešit pouhým výpisem, jedna věc na jeden řádek -> šlo by vytvořit "GUI" v souboru Hodnocení:/
+		case 10: 
 			topDesign();
 			sc.nextLine();
 			System.out.println(" Napište název filmu, který chcete přečíst ze souboru:");
 			String nazevFilmu2 =readString(sc);
 			File file2 = new File(System.getProperty("user.dir")+File.separator + "Filmy" + File.separator + nazevFilmu2+".txt");
 			try (BufferedReader br = new BufferedReader(new FileReader(file2))) {
-			    String s;
-			    //String vystup;
+			    String s;			   
 			    List<String> soubor = new ArrayList<>();
-			    while ((s = br.readLine()) != null) {
-			    	//databaze1.zpracujSoubor(s);
-			        String[] pole = s.split(":/ "); //řádek se rozloží do pole dle , -> každej prvek z pole podle čísla -> teoreticky by se mohly načítat pouze metodou, zbytek udělat v databázi -> Hraný/Animák -> prvek 0 -> jméno, prvek 5 -> hodnocení, rozděli podle , na body a hodnocení, pole řešit sudý lichý
-			        	 //<-Kdyby tu bylo místo pětky počet parametrů, bylo by to víc futureproof
-			        //System.out.println("test");	
-			        soubor.add(pole[1]);
-			        	
-			        
-			        //System.out.println(pole[0]);
-			        
-			        //databaze1.zpracujSouborJednoduse(pole);
-			        
-			        
+			    while ((s = br.readLine()) != null) {			    	
+			        String[] pole = s.split(":/ "); 
+			        soubor.add(pole[1]);			        				      			     
 			    }
-			    databaze1.zpracujSouborJednoduse(soubor);
-			    //System.out.println(soubor.get(0));
-			     //pro možnost využití obou metod
-			    
-			    /*while ((s = br.readLine()) != null) {
-			        String[] pole = s.split("; "); //řádek se rozloží do pole dle , -> každej prvek z pole podle čísla -> teoreticky by se mohly načítat pouze metodou, zbytek udělat v databázi -> Hraný/Animák -> prvek 0 -> jméno, prvek 5 -> hodnocení, rozděli podle , na body a hodnocení, pole řešit sudý lichý
-			        //databaze1.zpracujSoubor(pole);//Vice filmu ze souboru
-			       
-			        
-			        
-			    }*/
+			    databaze1.zpracujSouborJednoduse(soubor);			    
 			        System.out.println("Film byl úspěšně načten.");
 			        bottomDesign(sc);
 			} catch (Exception e) {
@@ -268,17 +246,12 @@ public class HlavniTrida {
 			    bottomDesign(sc);
 			}
 			break;
-		case 11:
-			//DatabazeSQL.SmazatObsahDatabaze();
-			//DatabazeSQL.vytvorSQL();
-			//for(String i:databaze1.getMapa().keySet())
-			//{
-			
-			//}
+		case 11:			
+			System.out.println("Probíhá ukládání do databáze Filmy.db");
 			DatabazeSQL.SmazatObsahDatabaze();
-			DatabazeSQL.vlozMapu(databaze1.getMapa()); //mohla by být jenom databáze
-		
-			//vymazat databazi
+			DatabazeSQL.vlozMapu(databaze1.getMapa());
+			System.out.println("Ukončování.");
+			konecProgramu=true;
 			break;
 		}}
 		sc.close();
@@ -293,19 +266,33 @@ public class HlavniTrida {
 
 	public static int readInt(Scanner sc)
 	{
-		//Scanner sc = new Scanner(System.in); ----> není potřeba, zavede se v přetížení -> předá ji z mainu.
 		int cislo;
 			try
 			{
 				cislo = sc.nextInt();
 			}
-			catch(InputMismatchException n) //pro špatné zadání čísla
+			catch(InputMismatchException n) 
 			{
 				System.out.println("Zadejte prosím celé číslo.");
 				sc.nextLine();
 				cislo = readInt(sc);
 			}
 			return cislo;
+	}
+	public static Film readFilm(Scanner sc,DatabazeFilmu databaze)
+	{
+		Film vybranyFilm = databaze.getFilm(sc.nextLine());
+		if(databaze.checkFilm(vybranyFilm)==true)
+		{
+			return vybranyFilm;
+ 		}
+		else
+		{
+		
+			System.out.println("Vybraný film nebyl nalezen v databázi. Zadejte název platného filmu.");
+				return vybranyFilm=readFilm(sc, databaze);
+		}
+		
 	}
 	public static String readString(Scanner sc)
 	{
@@ -317,19 +304,5 @@ public class HlavniTrida {
 		System.out.println();
 		System.out.println("           -Filmotéka 3000-");
 	}
-	//public static void vypisFilm(Film movie) //vypis filmu je umisteny v jinych tridach
-	//{
-	//	System.out.println(movie.getNazev());
-	//}
-	public static void clearScreen() {  
-	    System.out.print("\033[H\033[2J");  
-	    System.out.flush();  
-	}  
-}
 
-//TODO: Ošetřit switch
-//Rozdíl list/map -> klíče v mapě jsou rychlejší na hledání
-//Nechat CHATGPT vytvořit mapu tabulky (filmů)
-//Jak udělat abstrkatní třídy?
-//třídy privátní, udělat gettery a settery¨
-//Mapa kde je klíč a film -> datový typ film který obsahuje podrobnosti o filmu
+}

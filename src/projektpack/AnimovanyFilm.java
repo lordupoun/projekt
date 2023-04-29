@@ -1,26 +1,23 @@
 package projektpack;
 
 import java.util.List;
-//import java.util.ArrayList;
-//import java.util.List;
 import java.util.TreeMap;
 
 public class AnimovanyFilm extends Film {
 	private int doporucenyVek;
 	private TreeMap<String, Osoba> mapaAnimatoru;
-	//private List<Hodnoceni> listHodnoceni = new ArrayList<>();
 	public AnimovanyFilm(String nazev, String rezie, int rok, int doporucenyVek, String animatori)
 	 {
 		super(nazev, rezie, rok);
 		this.doporucenyVek=doporucenyVek;
 		vytvorListAnimatoru(animatori);
 	 }
-	private void vytvorListAnimatoru(String animatori) {
+	public void vytvorListAnimatoru(String animatori) {
 		String[] poleAnimatoru = animatori.split(",");
 		mapaAnimatoru = new TreeMap<>();
 		for(String i : poleAnimatoru)
 		{
-		mapaAnimatoru.put(i, null); // vrátit zpět pokud má být mapa až v extended třídě	
+		mapaAnimatoru.put(i, null); 	
 		}
 	}
 	public AnimovanyFilm(String nazev, String rezie, int rok, int doporucenyVek, String animatori, List<Hodnoceni> listHodnoceni)
@@ -38,31 +35,22 @@ public class AnimovanyFilm extends Film {
 		vytvorListAnimatoru(animatori);
 		
 	 }
+	public void setDoporucenyVek(int doporucenyVek) {
+		this.doporucenyVek = doporucenyVek;
+	}
 	@Override
-	String vypisFilm() { //přepsat na String co půjde ven
-		/*System.out.println("Název: "+nazev);
-		System.out.println("Režie: "+rezie);
-		System.out.println("Rok: "+rok);
-		System.out.println("Věk: "+doporucenyVek);
-		System.out.println("Animátoři: "+mapaAnimatoru.keySet());
-		System.out.println("Hodnocení: ");
-		for(Hodnoceni i : listHodnoceni)
-		{
-			System.out.println(i.getBody());
-			System.out.println(i.getSlovniHodnoceni());
-		}
-		return "";*/
+	String vypisFilm() { 
 		String hodnoceniVypis="";
-		for(Hodnoceni i : listHodnoceni) //možná by to bylo lepší vypisovat přímo tady ->System.out.println();
+		for(Hodnoceni i : listHodnoceni) 
 		{
 			hodnoceniVypis=hodnoceniVypis+"\n Počet bodů: "+i.getBody()+"; Slovní hodnocení: "+i.getSlovniHodnoceni();
 		}
 		
-		return ("Název: "+getNazev()+"\nRežie: "+getRezie()+"\nRok: "+getRok()+"\nVěk: "+doporucenyVek+"\nAnimátoři: "+mapaAnimatoru.keySet()+"\nHodnocení: "+hodnoceniVypis);
+		return ("Název: "+getNazev()+"\nRežie: "+getRezie()+"\nRok: "+getRok()+"\nDoporučený věk: "+doporucenyVek+"\nAnimátoři: "+mapaAnimatoru.keySet()+"\nHodnocení: "+hodnoceniVypis);
 		
 	}
 	@Override
-	boolean testBodyHodnoceni(int body) { //testuji zvlášť tak aby bodové hodnocení mohlo být vyplněné dříve než slovní
+	boolean testBodyHodnoceni(int body) { 
 		if(body>0&&body<11)
 		{
 			return true;
@@ -72,20 +60,20 @@ public class AnimovanyFilm extends Film {
 	}
 	@Override
 	String vypisFilmBezH() {
-		return ("Název: "+getNazev()+"\nRežie: "+getRezie()+"\nRok: "+getRok()+"\nVěk: "+doporucenyVek+"\nAnimátoři: "+mapaAnimatoru.keySet());
+		return ("Název: "+getNazev()+"\nRežie: "+getRezie()+"\nRok: "+getRok()+"\nDoporučený věk: "+doporucenyVek+"\nAnimátoři: "+mapaAnimatoru.keySet());
 	}	
 	@Override
 	TreeMap<String, Osoba> getMapaOsob() {
 		return mapaAnimatoru;
 	}
 	@Override
-	String vypisFilmSoubor() { //mohla by být jedna metoda s vypisFilmSoubor() jednoduse
+	String vypisFilmSoubor() { 
 		
 		return ("A; "+getNazev()+"; "+getRezie()+"; "+getRok()+"; "+doporucenyVek+"; "+getAnimatoriVypis()+"; "+getHodnoceniVypis());
 	}
 	protected String getAnimatoriVypis() {
-		String animatoriVypis=""; //Vypis animatoru ve tride Film -> bude obecne vypisovat seznam a je jedno jestli animatoru nebo hercu
-		for(String i : mapaAnimatoru.keySet()) //možná by to bylo lepší vypisovat přímo tady ->System.out.println();
+		String animatoriVypis=""; 
+		for(String i : mapaAnimatoru.keySet()) 
 		{
 			animatoriVypis=animatoriVypis+i+",";
 		}
@@ -98,7 +86,7 @@ public class AnimovanyFilm extends Film {
 	String vypisFilmSouborJednoduse() {
 		
 		
-		return ("Film: Animovaný\nNázev:/ "+getNazev()+"\nRežie:/ "+getRezie()+"\nRok:/ "+getRok()+"\n Doporučený Věk:/ "+doporucenyVek+"\nHerci:/ "+getAnimatoriVypis()+"\nHodnocení:/ "+getHodnoceniVypis());
-		//return null;
+		return ("Film:/ Animovaný\nNázev:/ "+getNazev()+"\nRežie:/ "+getRezie()+"\nRok:/ "+getRok()+"\nDoporučený věk:/ "+doporucenyVek+"\nHerci:/ "+getAnimatoriVypis()+"\nHodnocení:/ "+getHodnoceniVypis());
+		
 	}		
 }
